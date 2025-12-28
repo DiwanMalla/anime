@@ -23,64 +23,20 @@ body {
   background-color: var(--background);
   color: var(--foreground);
   font-family: "Inter", sans-serif;
-  background-image: radial-gradient(
-      ellipse at top,
-      rgba(196, 78, 255, 0.15) 0%,
-      transparent 50%
-    ),
-    radial-gradient(
-      ellipse at bottom right,
-      rgba(78, 202, 255, 0.1) 0%,
-      transparent 50%
-    ),
-    radial-gradient(
-      circle at 20% 80%,
-      rgba(255, 107, 157, 0.08) 0%,
-      transparent 30%
-    );
+  background-image: 
+    radial-gradient(ellipse at top, rgba(196, 78, 255, 0.15) 0%, transparent 50%),
+    radial-gradient(ellipse at bottom right, rgba(78, 202, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 20% 80%, rgba(255, 107, 157, 0.08) 0%, transparent 30%);
 }
 
-/* Custom Scrollbar - Anime Style */
-::-webkit-scrollbar {
-  width: 10px;
-}
-::-webkit-scrollbar-track {
-  background: linear-gradient(180deg, #1a0a2e 0%, #0a0014 100%);
-}
-::-webkit-scrollbar-thumb {
-  background: linear-gradient(
-    180deg,
-    var(--anime-pink) 0%,
-    var(--anime-purple) 100%
-  );
-  border-radius: 10px;
-  border: 2px solid #0a0014;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(
-    180deg,
-    var(--anime-purple) 0%,
-    var(--anime-blue) 100%
-  );
-  box-shadow: 0 0 15px var(--anime-purple);
-}
+
 
 /* Anime Panel Border Style */
 .anime-panel {
   position: relative;
-  background: linear-gradient(
-    135deg,
-    rgba(26, 10, 46, 0.9) 0%,
-    rgba(10, 0, 20, 0.95) 100%
-  );
+  background: linear-gradient(135deg, rgba(26, 10, 46, 0.9) 0%, rgba(10, 0, 20, 0.95) 100%);
   border: 2px solid transparent;
-  border-image: linear-gradient(
-      135deg,
-      var(--anime-pink),
-      var(--anime-purple),
-      var(--anime-blue)
-    )
-    1;
+  border-image: linear-gradient(135deg, var(--anime-pink), var(--anime-purple), var(--anime-blue)) 1;
   backdrop-filter: blur(10px);
 }
 
@@ -91,12 +47,7 @@ body {
   left: -2px;
   right: -2px;
   bottom: -2px;
-  background: linear-gradient(
-    135deg,
-    var(--anime-pink),
-    var(--anime-purple),
-    var(--anime-blue)
-  );
+  background: linear-gradient(135deg, var(--anime-pink), var(--anime-purple), var(--anime-blue));
   z-index: -1;
   opacity: 0.3;
   filter: blur(15px);
@@ -107,13 +58,16 @@ body {
   position: relative;
   background: rgba(10, 0, 20, 0.8);
   border: 3px solid #fff;
-  box-shadow: 4px 4px 0 0 rgba(0, 0, 0, 0.8),
+  box-shadow: 
+    4px 4px 0 0 rgba(0, 0, 0, 0.8),
     inset 0 0 30px rgba(196, 78, 255, 0.1);
 }
 
 /* Glowing Text Effect */
 .glow-text {
-  text-shadow: 0 0 10px currentColor, 0 0 20px currentColor,
+  text-shadow: 
+    0 0 10px currentColor,
+    0 0 20px currentColor,
     0 0 40px currentColor;
 }
 
@@ -147,21 +101,15 @@ body {
 
 .anime-card:hover {
   transform: translateY(-10px) scale(1.02);
-  box-shadow: 0 20px 40px rgba(196, 78, 255, 0.3),
+  box-shadow: 
+    0 20px 40px rgba(196, 78, 255, 0.3),
     0 0 60px rgba(255, 107, 157, 0.2);
 }
 
 /* Sparkle Animation */
 @keyframes sparkle {
-  0%,
-  100% {
-    opacity: 0;
-    transform: scale(0);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1);
-  }
+  0%, 100% { opacity: 0; transform: scale(0); }
+  50% { opacity: 1; transform: scale(1); }
 }
 
 .sparkle {
@@ -170,13 +118,8 @@ body {
 
 /* Floating Animation */
 @keyframes float {
-  0%,
-  100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
 }
 
 .float {
@@ -185,13 +128,8 @@ body {
 
 /* Pulse Glow */
 @keyframes pulse-glow {
-  0%,
-  100% {
-    box-shadow: 0 0 20px var(--anime-pink);
-  }
-  50% {
-    box-shadow: 0 0 40px var(--anime-purple), 0 0 60px var(--anime-pink);
-  }
+  0%, 100% { box-shadow: 0 0 20px var(--anime-pink); }
+  50% { box-shadow: 0 0 40px var(--anime-purple), 0 0 60px var(--anime-pink); }
 }
 
 .pulse-glow {
@@ -200,11 +138,7 @@ body {
 
 /* Genre Tag Style */
 .genre-tag {
-  background: linear-gradient(
-    135deg,
-    rgba(255, 107, 157, 0.2),
-    rgba(196, 78, 255, 0.2)
-  );
+  background: linear-gradient(135deg, rgba(255, 107, 157, 0.2), rgba(196, 78, 255, 0.2));
   border: 1px solid rgba(255, 107, 157, 0.5);
   transition: all 0.3s ease;
 }
@@ -227,23 +161,12 @@ body {
 /* Section Divider */
 .section-divider {
   height: 2px;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    var(--anime-pink),
-    var(--anime-purple),
-    var(--anime-blue),
-    transparent
-  );
+  background: linear-gradient(90deg, transparent, var(--anime-pink), var(--anime-purple), var(--anime-blue), transparent);
 }
 
 /* Character Card */
 .character-card {
-  background: linear-gradient(
-    180deg,
-    rgba(26, 10, 46, 0.8) 0%,
-    rgba(10, 0, 20, 0.9) 100%
-  );
+  background: linear-gradient(180deg, rgba(26, 10, 46, 0.8) 0%, rgba(10, 0, 20, 0.9) 100%);
   border: 1px solid rgba(196, 78, 255, 0.3);
   transition: all 0.3s ease;
 }
@@ -271,12 +194,7 @@ body {
   content: "";
   position: absolute;
   inset: -2px;
-  background: linear-gradient(
-    135deg,
-    var(--anime-pink),
-    var(--anime-purple),
-    var(--anime-blue)
-  );
+  background: linear-gradient(135deg, var(--anime-pink), var(--anime-purple), var(--anime-blue));
   border-radius: inherit;
   z-index: -1;
 }
@@ -292,22 +210,14 @@ body {
 
 /* Episode Card */
 .episode-card {
-  background: linear-gradient(
-    135deg,
-    rgba(26, 10, 46, 0.6) 0%,
-    rgba(10, 0, 20, 0.8) 100%
-  );
+  background: linear-gradient(135deg, rgba(26, 10, 46, 0.6) 0%, rgba(10, 0, 20, 0.8) 100%);
   border: 1px solid rgba(78, 202, 255, 0.3);
   transition: all 0.3s ease;
 }
 
 .episode-card:hover {
   border-color: var(--anime-blue);
-  background: linear-gradient(
-    135deg,
-    rgba(78, 202, 255, 0.1) 0%,
-    rgba(196, 78, 255, 0.1) 100%
-  );
+  background: linear-gradient(135deg, rgba(78, 202, 255, 0.1) 0%, rgba(196, 78, 255, 0.1) 100%);
 }
 
 /* Status Indicator */

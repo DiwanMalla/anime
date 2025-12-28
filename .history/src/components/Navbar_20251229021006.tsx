@@ -78,17 +78,19 @@ export default function Navbar() {
       <div className="max-w-[1800px] mx-auto px-4 md:px-12 py-4 flex items-center justify-between gap-8">
         <div className="flex items-center gap-12">
           {/* Logo */}
-          <Link
-            href="/"
-            className="text-2xl md:text-3xl font-bold tracking-tighter group relative"
-          >
-            <span className="text-white group-hover:text-[#00f3ff] transition-colors duration-300">
-              ANI
-            </span>
-            <span className="text-[#00f3ff] group-hover:text-[#bc13fe] transition-colors duration-300">
-              NEXUS
-            </span>
-            <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-[#00f3ff] to-[#bc13fe] group-hover:w-full transition-all duration-300" />
+          <Link href="/" className="flex items-center gap-2 group">
+            <div className="relative">
+              <Sparkles className="h-8 w-8 text-[#ff6b9d] group-hover:text-[#ffd93d] transition-colors" />
+              <div className="absolute inset-0 blur-lg bg-[#ff6b9d] opacity-50 group-hover:opacity-80 transition-opacity" />
+            </div>
+            <div className="text-2xl md:text-3xl font-black tracking-tight">
+              <span className="text-white group-hover:text-[#ff6b9d] transition-colors">
+                Ani
+              </span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#ff6b9d] via-[#c44eff] to-[#4ecaff] group-hover:from-[#4ecaff] group-hover:via-[#c44eff] group-hover:to-[#ff6b9d] transition-all">
+                Verse
+              </span>
+            </div>
           </Link>
 
           {/* Nav Links */}

@@ -7,7 +7,6 @@ export const SEARCH_ANIME_QUERY = `
           romaji
           english
           native
-          userPreferred
         }
         coverImage {
           large
@@ -16,9 +15,6 @@ export const SEARCH_ANIME_QUERY = `
         description
         averageScore
         genres
-        format
-        seasonYear
-        status
       }
     }
   }
@@ -275,7 +271,6 @@ export const ANIME_DETAILS_QUERY = `
             id
             name {
               full
-              native
             }
             image {
               large

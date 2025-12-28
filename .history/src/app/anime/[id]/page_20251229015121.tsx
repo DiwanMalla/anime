@@ -65,14 +65,14 @@ export default async function AnimeDetailsPage({ params }: PageProps) {
     <main className="min-h-screen bg-[#050505] text-gray-100 pb-20 font-sans selection:bg-[#00f3ff] selection:text-black">
       {/* Banner */}
       <div className="relative h-[50vh] md:h-[60vh] w-full overflow-hidden">
-        <div className="absolute top-20 md:top-24 left-4 z-20">
+        <div className="absolute top-24 left-4 z-20">
           <Link
             href="/"
-            className="flex items-center gap-2 text-white/80 hover:text-[#00f3ff] transition group bg-black/50 backdrop-blur-sm px-3 md:px-4 py-1.5 md:py-2 rounded-full border border-white/10 hover:border-[#00f3ff]/50"
+            className="flex items-center gap-2 text-white/80 hover:text-[#00f3ff] transition group bg-black/50 backdrop-blur-sm px-4 py-2 rounded-full border border-white/10 hover:border-[#00f3ff]/50"
           >
-            <ChevronLeft className="h-4 w-4 md:h-5 md:w-5 group-hover:-translate-x-1 transition-transform" />
-            <span className="font-mono text-xs md:text-sm uppercase tracking-wider">
-              Back
+            <ChevronLeft className="h-5 w-5 group-hover:-translate-x-1 transition-transform" />
+            <span className="font-mono text-sm uppercase tracking-wider">
+              Back to Base
             </span>
           </Link>
         </div>
@@ -187,7 +187,9 @@ export default async function AnimeDetailsPage({ params }: PageProps) {
                             className="w-6 h-6 rounded object-contain"
                           />
                         )}
-                        <span className="font-bold text-base">{link.site}</span>
+                        <span className="font-bold text-base">
+                          {link.site}
+                        </span>
                       </div>
                       <ExternalLink className="h-4 w-4 text-[#00f3ff] opacity-0 group-hover:opacity-100 transition-opacity" />
                     </a>
@@ -204,10 +206,7 @@ export default async function AnimeDetailsPage({ params }: PageProps) {
                 </h3>
                 <div className="flex flex-col gap-2">
                   {anime.synonyms.map((syn: string, i: number) => (
-                    <div
-                      key={i}
-                      className="text-xs text-gray-400 font-mono border-l-2 border-[#bc13fe]/30 pl-2 py-1"
-                    >
+                    <div key={i} className="text-xs text-gray-400 font-mono border-l-2 border-[#bc13fe]/30 pl-2 py-1">
                       {syn}
                     </div>
                   ))}
@@ -225,19 +224,13 @@ export default async function AnimeDetailsPage({ params }: PageProps) {
                   {anime.stats.statusDistribution.map((stat: any) => (
                     <div key={stat.status} className="space-y-1">
                       <div className="flex justify-between text-[10px] font-mono uppercase">
-                        <span className="text-gray-400">
-                          {stat.status.replace(/_/g, " ")}
-                        </span>
-                        <span className="text-white">
-                          {stat.amount.toLocaleString()}
-                        </span>
+                        <span className="text-gray-400">{stat.status.replace(/_/g, " ")}</span>
+                        <span className="text-white">{stat.amount.toLocaleString()}</span>
                       </div>
                       <div className="h-1 w-full bg-white/5 rounded-full overflow-hidden">
-                        <div
-                          className="h-full bg-gradient-to-r from-[#00f3ff] to-[#bc13fe]"
-                          style={{
-                            width: `${(stat.amount / anime.popularity) * 100}%`,
-                          }}
+                        <div 
+                          className="h-full bg-gradient-to-r from-[#00f3ff] to-[#bc13fe]" 
+                          style={{ width: `${(stat.amount / anime.popularity) * 100}%` }}
                         />
                       </div>
                     </div>
@@ -249,7 +242,7 @@ export default async function AnimeDetailsPage({ params }: PageProps) {
 
           {/* Right Column: Content */}
           <div className="flex-1 pt-4">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold mb-2 text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-500 drop-shadow-[0_0_10px_rgba(255,255,255,0.3)] leading-tight">
+            <h1 className="text-5xl md:text-7xl font-bold mb-2 text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-500 drop-shadow-[0_0_10px_rgba(255,255,255,0.3)]">
               {title}
             </h1>
             {anime.title.native && (
@@ -334,27 +327,21 @@ export default async function AnimeDetailsPage({ params }: PageProps) {
                 </h3>
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
                   {anime.relations.edges.map((edge: any) => (
-                    <Link
-                      key={edge.node.id}
+                    <Link 
+                      key={edge.node.id} 
                       href={`/anime/${edge.node.id}`}
                       className="group relative aspect-[2/3] rounded overflow-hidden border border-white/10 hover:border-[#00f3ff]/50 transition-all"
                     >
-                      <img
-                        src={edge.node.coverImage.large}
+                      <img 
+                        src={edge.node.coverImage.large} 
                         alt={edge.node.title.userPreferred}
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" 
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-80" />
                       <div className="absolute bottom-0 left-0 p-2 w-full">
-                        <div className="text-[10px] font-mono text-[#00f3ff] uppercase tracking-tighter mb-1">
-                          {edge.relationType.replace(/_/g, " ")}
-                        </div>
-                        <div className="text-xs font-bold text-white truncate">
-                          {edge.node.title.userPreferred}
-                        </div>
-                        <div className="text-[10px] text-gray-400 uppercase">
-                          {edge.node.format} • {edge.node.status}
-                        </div>
+                        <div className="text-[10px] font-mono text-[#00f3ff] uppercase tracking-tighter mb-1">{edge.relationType.replace(/_/g, " ")}</div>
+                        <div className="text-xs font-bold text-white truncate">{edge.node.title.userPreferred}</div>
+                        <div className="text-[10px] text-gray-400 uppercase">{edge.node.format} • {edge.node.status}</div>
                       </div>
                     </Link>
                   ))}
@@ -370,30 +357,26 @@ export default async function AnimeDetailsPage({ params }: PageProps) {
                 </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-4xl">
                   {anime.streamingEpisodes.map((ep: any, i: number) => (
-                    <a
-                      key={i}
-                      href={ep.url}
-                      target="_blank"
+                    <a 
+                      key={i} 
+                      href={ep.url} 
+                      target="_blank" 
                       rel="noopener noreferrer"
                       className="flex gap-4 bg-[#0a0a0a] border border-gray-800 p-2 rounded hover:border-[#bc13fe]/50 transition-all group"
                     >
                       <div className="relative w-32 h-20 flex-shrink-0 overflow-hidden rounded">
-                        <img
-                          src={ep.thumbnail}
+                        <img 
+                          src={ep.thumbnail} 
                           alt={ep.title}
-                          className="w-full h-full object-cover group-hover:scale-110 transition-transform"
+                          className="w-full h-full object-cover group-hover:scale-110 transition-transform" 
                         />
                         <div className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity">
                           <PlayCircle className="h-8 w-8 text-white" />
                         </div>
                       </div>
                       <div className="flex flex-col justify-center min-w-0">
-                        <div className="text-sm font-bold text-white truncate group-hover:text-[#bc13fe] transition-colors">
-                          {ep.title}
-                        </div>
-                        <div className="text-xs text-gray-500 font-mono uppercase mt-1">
-                          {ep.site}
-                        </div>
+                        <div className="text-sm font-bold text-white truncate group-hover:text-[#bc13fe] transition-colors">{ep.title}</div>
+                        <div className="text-xs text-gray-500 font-mono uppercase mt-1">{ep.site}</div>
                       </div>
                     </a>
                   ))}
@@ -426,47 +409,31 @@ export default async function AnimeDetailsPage({ params }: PageProps) {
                 <h3 className="text-xl font-mono text-[#bc13fe] mb-6 flex items-center gap-2 uppercase tracking-widest">
                   <Users className="h-5 w-5" /> Characters
                 </h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-[1400px]">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 max-w-4xl">
                   {anime.characters.edges.map((char: any) => (
                     <div
                       key={char.node.id}
-                      className="flex justify-between bg-[#0a0a0a] border border-gray-800 rounded hover:border-[#bc13fe]/50 transition-colors p-2 h-24"
+                      className="flex bg-[#0a0a0a] border border-gray-800 hover:border-[#bc13fe]/50 transition-colors rounded overflow-hidden group"
                     >
-                      {/* Character (Left) */}
-                      <div className="flex gap-3 h-full">
-                        <img
-                          src={char.node.image.large || char.node.image.medium}
-                          alt={char.node.name.full}
-                          className="w-14 h-full object-cover rounded"
-                        />
-                        <div className="flex flex-col justify-center">
-                          <div className="text-sm font-bold text-white line-clamp-2 leading-tight">
-                            {char.node.name.full}
-                          </div>
-                          <div className="text-xs text-gray-500 font-mono uppercase mt-1">
-                            {char.role}
-                          </div>
+                      <img
+                        src={char.node.image.medium}
+                        alt={char.node.name.full}
+                        className="w-16 h-24 object-cover transition-all duration-500"
+                      />
+                      <div className="p-3 flex flex-col justify-center text-sm">
+                        <div className="font-medium text-white group-hover:text-[#bc13fe] transition-colors">
+                          {char.node.name.full}
                         </div>
+                        <div className="text-gray-500 text-xs font-mono uppercase mt-1">
+                          {char.role}
+                        </div>
+                        {char.voiceActors?.[0] && (
+                          <div className="mt-2 text-xs text-gray-600 flex items-center gap-1">
+                            <span className="w-1 h-1 bg-gray-600 rounded-full" />
+                            {char.voiceActors[0].name.full}
+                          </div>
+                        )}
                       </div>
-
-                      {/* Voice Actor (Right) */}
-                      {char.voiceActors?.[0] && (
-                        <div className="flex gap-3 h-full text-right">
-                          <div className="flex flex-col justify-center items-end">
-                            <div className="text-sm font-bold text-white line-clamp-2 leading-tight">
-                              {char.voiceActors[0].name.full}
-                            </div>
-                            <div className="text-xs text-gray-500 font-mono uppercase mt-1">
-                              Japanese
-                            </div>
-                          </div>
-                          <img
-                            src={char.voiceActors[0].image.large || char.voiceActors[0].image.medium}
-                            alt={char.voiceActors[0].name.full}
-                            className="w-14 h-full object-cover rounded"
-                          />
-                        </div>
-                      )}
                     </div>
                   ))}
                 </div>
@@ -479,29 +446,24 @@ export default async function AnimeDetailsPage({ params }: PageProps) {
                 <h3 className="text-xl font-mono text-white mb-6 flex items-center gap-2 uppercase tracking-widest">
                   <Users className="h-5 w-5" /> Core System Architects
                 </h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-[1400px]">
-                  {anime.staff.edges.map((staff: any, index: number) => (
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl">
+                  {anime.staff.edges.map((staff: any) => (
                     <div
-                      key={`${staff.node.id}-${staff.role}-${index}`}
-                      className="flex items-center gap-4 bg-[#0a0a0a] border border-gray-800 p-3 rounded hover:border-[#bc13fe]/30 transition-colors h-24"
+                      key={staff.node.id}
+                      className="flex items-center gap-3 bg-[#0a0a0a] border border-gray-800 p-3 rounded hover:border-white/30 transition-colors"
                     >
                       <img
-                        src={staff.node.image.large || staff.node.image.medium}
+                        src={staff.node.image.medium}
                         alt={staff.node.name.full}
-                        className="w-16 h-full object-cover rounded"
+                        className="w-12 h-12 rounded-full object-cover transition-all"
                       />
-                      <div className="flex flex-col justify-center min-w-0">
-                        <div className="text-sm font-bold text-white truncate">
+                      <div className="flex flex-col">
+                        <span className="text-sm font-medium text-white">
                           {staff.node.name.full}
-                        </div>
-                        {staff.node.name.native && (
-                          <div className="text-xs text-gray-400 font-mono truncate">
-                            {staff.node.name.native}
-                          </div>
-                        )}
-                        <div className="text-[10px] text-[#bc13fe] font-mono uppercase mt-1 truncate">
+                        </span>
+                        <span className="text-xs text-gray-500 font-mono uppercase">
                           {staff.role}
-                        </div>
+                        </span>
                       </div>
                     </div>
                   ))}

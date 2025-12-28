@@ -275,7 +275,6 @@ export const ANIME_DETAILS_QUERY = `
             id
             name {
               full
-              native
             }
             image {
               large

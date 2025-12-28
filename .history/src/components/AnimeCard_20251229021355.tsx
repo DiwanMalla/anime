@@ -64,14 +64,6 @@ export default function AnimeCard({ anime }: AnimeCardProps) {
               </div>
             </div>
 
-            {/* Score Badge */}
-            {anime.averageScore && (
-              <div className="absolute top-3 right-3 score-badge px-2.5 py-1 rounded-lg flex items-center gap-1.5 text-sm">
-                <Star className="h-3.5 w-3.5 fill-current" />
-                <span>{anime.averageScore}%</span>
-              </div>
-            )}
-
             {/* Format Badge */}
             {anime.format && (
               <div className="absolute top-3 left-3 bg-[#c44eff]/80 backdrop-blur-sm text-white text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider">

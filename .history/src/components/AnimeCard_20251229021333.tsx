@@ -54,9 +54,6 @@ export default function AnimeCard({ anime }: AnimeCardProps) {
               className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-110"
             />
 
-            {/* Overlay Gradient */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0a0014] via-transparent to-transparent opacity-90" />
-
             {/* Play Button on Hover */}
             <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
               <div className="w-16 h-16 rounded-full bg-[#ff6b9d]/90 flex items-center justify-center backdrop-blur-sm transform scale-0 group-hover:scale-100 transition-transform duration-300">

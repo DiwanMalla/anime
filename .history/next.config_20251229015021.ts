@@ -4,8 +4,8 @@ const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: "https",
-        hostname: "s4.anilist.co",
+        protocol: 'https',
+        hostname: 's4.anilist.co',
       },
     ],
   },

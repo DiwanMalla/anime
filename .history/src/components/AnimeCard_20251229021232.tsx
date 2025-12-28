@@ -37,26 +37,24 @@ export default function AnimeCard({ anime }: AnimeCardProps) {
     >
       <Link href={`/anime/${anime.id}`} className="block relative">
         {/* Glow Effect */}
-        <div
+        <div 
           className="absolute -inset-2 rounded-xl opacity-0 group-hover:opacity-60 blur-xl transition-opacity duration-500"
-          style={{
-            background: `linear-gradient(135deg, ${accentColor}, #c44eff)`,
-          }}
+          style={{ background: `linear-gradient(135deg, ${accentColor}, #c44eff)` }}
         />
-
+        
         {/* Card Container */}
-        <div className="relative bg-[#1a0a2e] rounded-xl overflow-hidden border-2 border-white/10 group-hover:border-[#ff6b9d]/50 transition-all duration-300">
+        <div className="relative bg-[#1a0a2e] rounded-xl border-2 border-white/10 group-hover:border-[#ff6b9d]/50 transition-all duration-300">
           {/* Image Container */}
-          <div className="relative h-[280px] w-full overflow-hidden">
+          <div className="relative h-[280px] w-full">
             <img
               src={anime.coverImage.large}
               alt={title}
               className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-110"
             />
-
+            
             {/* Overlay Gradient */}
             <div className="absolute inset-0 bg-gradient-to-t from-[#0a0014] via-transparent to-transparent opacity-90" />
-
+            
             {/* Play Button on Hover */}
             <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
               <div className="w-16 h-16 rounded-full bg-[#ff6b9d]/90 flex items-center justify-center backdrop-blur-sm transform scale-0 group-hover:scale-100 transition-transform duration-300">
@@ -82,21 +80,19 @@ export default function AnimeCard({ anime }: AnimeCardProps) {
             {/* Sparkle Decorations */}
             <Sparkles className="absolute bottom-16 right-4 h-4 w-4 text-[#ffd93d] opacity-0 group-hover:opacity-100 transition-opacity sparkle" />
           </div>
-
+          
           {/* Content */}
           <div className="p-4 relative">
             {/* Decorative Line */}
-            <div
+            <div 
               className="absolute top-0 left-4 right-4 h-0.5 rounded-full opacity-50"
-              style={{
-                background: `linear-gradient(90deg, transparent, ${accentColor}, transparent)`,
-              }}
+              style={{ background: `linear-gradient(90deg, transparent, ${accentColor}, transparent)` }}
             />
-
+            
             <h3 className="text-white font-bold text-base truncate group-hover:text-[#ff6b9d] transition-colors mt-1">
               {title}
             </h3>
-
+            
             <div className="flex items-center gap-2 mt-2 text-xs text-gray-400">
               {anime.seasonYear && (
                 <span className="text-[#4ecaff]">{anime.seasonYear}</span>
@@ -110,22 +106,13 @@ export default function AnimeCard({ anime }: AnimeCardProps) {
               {anime.status && (
                 <>
                   <span className="w-1 h-1 rounded-full bg-gray-600" />
-                  <span
-                    className={
-                      anime.status === "RELEASING"
-                        ? "text-[#4ecaff]"
-                        : anime.status === "FINISHED"
-                        ? "text-[#ffd93d]"
-                        : "text-[#ff6b9d]"
-                    }
-                  >
-                    {anime.status === "RELEASING"
-                      ? "Airing"
-                      : anime.status === "FINISHED"
-                      ? "Completed"
-                      : anime.status === "NOT_YET_RELEASED"
-                      ? "Upcoming"
-                      : anime.status}
+                  <span className={
+                    anime.status === "RELEASING" ? "text-[#4ecaff]" :
+                    anime.status === "FINISHED" ? "text-[#ffd93d]" : "text-[#ff6b9d]"
+                  }>
+                    {anime.status === "RELEASING" ? "Airing" : 
+                     anime.status === "FINISHED" ? "Completed" : 
+                     anime.status === "NOT_YET_RELEASED" ? "Upcoming" : anime.status}
                   </span>
                 </>
               )}
