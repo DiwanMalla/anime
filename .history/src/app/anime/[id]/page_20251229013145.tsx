@@ -7,7 +7,7 @@ import {
   ChevronLeft,
   Users,
   Clapperboard,
-  MonitorPlay,
+  MonitorPlay
 } from "lucide-react";
 import AnimeCard from "@/components/AnimeCard";
 import { notFound } from "next/navigation";
@@ -18,24 +18,9 @@ interface PageProps {
 }
 
 function formatDate(date: { year: number; month: number; day: number }) {
-  if (!date.year) return "TBA";
-  const monthNames = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec",
-  ];
-  return `${monthNames[date.month - 1] || "?"} ${date.day || "?"}, ${
-    date.year
-  }`;
+  if (!date.year) return 'TBA';
+  const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  return `${monthNames[date.month - 1] || '?'} ${date.day || '?'}, ${date.year}`;
 }
 
 export default async function AnimeDetailsPage({ params }: PageProps) {
@@ -65,10 +50,8 @@ export default async function AnimeDetailsPage({ params }: PageProps) {
             href="/"
             className="flex items-center gap-2 text-white/80 hover:text-[#00f3ff] transition group bg-black/50 backdrop-blur-sm px-4 py-2 rounded-full border border-white/10 hover:border-[#00f3ff]/50"
           >
-            <ChevronLeft className="h-5 w-5 group-hover:-translate-x-1 transition-transform" />
-            <span className="font-mono text-sm uppercase tracking-wider">
-              Back to Base
-            </span>
+            <ChevronLeft className="h-5 w-5 group-hover:-translate-x-1 transition-transform" /> 
+            <span className="font-mono text-sm uppercase tracking-wider">Back to Base</span>
           </Link>
         </div>
         {anime.bannerImage ? (
@@ -112,19 +95,11 @@ export default async function AnimeDetailsPage({ params }: PageProps) {
                 </div>
                 <div className="flex justify-between items-center border-b border-white/5 pb-2">
                   <span className="text-gray-500 uppercase">Duration</span>
-                  <span className="text-white">
-                    {anime.duration ? `${anime.duration} min` : "?"}
-                  </span>
+                  <span className="text-white">{anime.duration ? `${anime.duration} min` : "?"}</span>
                 </div>
                 <div className="flex justify-between items-center border-b border-white/5 pb-2">
                   <span className="text-gray-500 uppercase">Status</span>
-                  <span
-                    className={`uppercase ${
-                      anime.status === "RELEASING"
-                        ? "text-[#00f3ff] animate-pulse"
-                        : "text-white"
-                    }`}
-                  >
+                  <span className={`uppercase ${anime.status === 'RELEASING' ? 'text-[#00f3ff] animate-pulse' : 'text-white'}`}>
                     {anime.status}
                   </span>
                 </div>
@@ -152,9 +127,7 @@ export default async function AnimeDetailsPage({ params }: PageProps) {
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-gray-500 uppercase">Studio</span>
-                  <span className="text-[#bc13fe]">
-                    {anime.studios?.nodes[0]?.name || "?"}
-                  </span>
+                  <span className="text-[#bc13fe]">{anime.studios?.nodes[0]?.name || "?"}</span>
                 </div>
               </div>
             </div>
@@ -205,27 +178,11 @@ export default async function AnimeDetailsPage({ params }: PageProps) {
                 <Star className="h-4 w-4 fill-current" />
                 <span className="font-bold">{anime.averageScore}% SYNC</span>
               </div>
-              <div className="flex items-center gap-2 text-[#bc13fe] bg-[#bc13fe]/10 px-3 py-1 rounded border border-[#bc13fe]/20">
-                <Users className="h-4 w-4" />
-                <span>{anime.popularity?.toLocaleString()} POP</span>
-              </div>
               <span className="text-gray-400">{anime.seasonYear}</span>
               <span className="border border-gray-600 px-2 py-0.5 rounded text-xs text-gray-400 uppercase tracking-wider">
                 {anime.format}
               </span>
             </div>
-
-            {anime.nextAiringEpisode && (
-              <div className="mb-8 p-4 bg-[#00f3ff]/5 border border-[#00f3ff]/30 rounded-lg flex items-center gap-4 animate-pulse">
-                <Clock className="h-6 w-6 text-[#00f3ff]" />
-                <div>
-                  <div className="text-[#00f3ff] font-mono text-sm uppercase tracking-widest">Next Transmission</div>
-                  <div className="text-white font-bold">
-                    Episode {anime.nextAiringEpisode.episode} airing in {Math.ceil(anime.nextAiringEpisode.timeUntilAiring / 86400)} days
-                  </div>
-                </div>
-              </div>
-            )}
 
             <div className="flex flex-wrap gap-3 mb-10 items-center">
               {anime.genres.map((genre: string) => (
@@ -251,9 +208,7 @@ export default async function AnimeDetailsPage({ params }: PageProps) {
 
             <div className="mb-12 relative">
               <div className="absolute -left-4 top-0 bottom-0 w-1 bg-gradient-to-b from-[#00f3ff] to-transparent opacity-50" />
-              <h3 className="text-xl font-mono text-gray-400 mb-4 uppercase tracking-widest">
-                Synopsis
-              </h3>
+              <h3 className="text-xl font-mono text-gray-400 mb-4 uppercase tracking-widest">Synopsis</h3>
               <div
                 className="text-gray-300 leading-relaxed max-w-4xl text-lg font-light"
                 dangerouslySetInnerHTML={{ __html: anime.description }}
@@ -283,7 +238,7 @@ export default async function AnimeDetailsPage({ params }: PageProps) {
             {anime.characters?.edges?.length > 0 && (
               <div className="mb-12">
                 <h3 className="text-xl font-mono text-[#bc13fe] mb-6 flex items-center gap-2 uppercase tracking-widest">
-                  <Users className="h-5 w-5" /> Characters
+                  <Users className="h-5 w-5" /> Neural Links
                 </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 max-w-4xl">
                   {anime.characters.edges.map((char: any) => (
@@ -300,9 +255,7 @@ export default async function AnimeDetailsPage({ params }: PageProps) {
                         <div className="font-medium text-white group-hover:text-[#bc13fe] transition-colors">
                           {char.node.name.full}
                         </div>
-                        <div className="text-gray-500 text-xs font-mono uppercase mt-1">
-                          {char.role}
-                        </div>
+                        <div className="text-gray-500 text-xs font-mono uppercase mt-1">{char.role}</div>
                         {char.voiceActors?.[0] && (
                           <div className="mt-2 text-xs text-gray-600 flex items-center gap-1">
                             <span className="w-1 h-1 bg-gray-600 rounded-full" />
@@ -320,7 +273,7 @@ export default async function AnimeDetailsPage({ params }: PageProps) {
             {anime.recommendations?.nodes?.length > 0 && (
               <div>
                 <h3 className="text-2xl font-mono text-white mb-8 uppercase tracking-widest border-l-4 border-[#00f3ff] pl-4">
-                  Recommendations
+                  Related Database Entries
                 </h3>
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
                   {anime.recommendations.nodes.map((rec: any) => (

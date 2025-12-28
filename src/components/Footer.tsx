@@ -48,7 +48,7 @@ export default function Footer() {
           </button>
         </div>
 
-        <div className="text-xs">&copy; 2024 AniVerse, Inc.</div>
+        <div className="text-xs">&copy; {new Date().getFullYear()} AetherStream, Inc.</div>
       </div>
     </footer>
   );

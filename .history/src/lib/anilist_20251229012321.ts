@@ -191,21 +191,6 @@ export const ANIME_DETAILS_QUERY = `
         site
         thumbnail
       }
-      tags {
-        id
-        name
-        description
-        rank
-        isMediaSpoiler
-      }
-      externalLinks {
-        id
-        site
-        url
-        type
-        icon
-        color
-      }
       characters(sort: ROLE, perPage: 6) {
         edges {
           role

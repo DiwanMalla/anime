@@ -205,27 +205,11 @@ export default async function AnimeDetailsPage({ params }: PageProps) {
                 <Star className="h-4 w-4 fill-current" />
                 <span className="font-bold">{anime.averageScore}% SYNC</span>
               </div>
-              <div className="flex items-center gap-2 text-[#bc13fe] bg-[#bc13fe]/10 px-3 py-1 rounded border border-[#bc13fe]/20">
-                <Users className="h-4 w-4" />
-                <span>{anime.popularity?.toLocaleString()} POP</span>
-              </div>
               <span className="text-gray-400">{anime.seasonYear}</span>
               <span className="border border-gray-600 px-2 py-0.5 rounded text-xs text-gray-400 uppercase tracking-wider">
                 {anime.format}
               </span>
             </div>
-
-            {anime.nextAiringEpisode && (
-              <div className="mb-8 p-4 bg-[#00f3ff]/5 border border-[#00f3ff]/30 rounded-lg flex items-center gap-4 animate-pulse">
-                <Clock className="h-6 w-6 text-[#00f3ff]" />
-                <div>
-                  <div className="text-[#00f3ff] font-mono text-sm uppercase tracking-widest">Next Transmission</div>
-                  <div className="text-white font-bold">
-                    Episode {anime.nextAiringEpisode.episode} airing in {Math.ceil(anime.nextAiringEpisode.timeUntilAiring / 86400)} days
-                  </div>
-                </div>
-              </div>
-            )}
 
             <div className="flex flex-wrap gap-3 mb-10 items-center">
               {anime.genres.map((genre: string) => (
@@ -283,7 +267,7 @@ export default async function AnimeDetailsPage({ params }: PageProps) {
             {anime.characters?.edges?.length > 0 && (
               <div className="mb-12">
                 <h3 className="text-xl font-mono text-[#bc13fe] mb-6 flex items-center gap-2 uppercase tracking-widest">
-                  <Users className="h-5 w-5" /> Characters
+                  <Users className="h-5 w-5" /> Neural Links
                 </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 max-w-4xl">
                   {anime.characters.edges.map((char: any) => (
@@ -320,7 +304,7 @@ export default async function AnimeDetailsPage({ params }: PageProps) {
             {anime.recommendations?.nodes?.length > 0 && (
               <div>
                 <h3 className="text-2xl font-mono text-white mb-8 uppercase tracking-widest border-l-4 border-[#00f3ff] pl-4">
-                  Recommendations
+                  Related Database Entries
                 </h3>
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
                   {anime.recommendations.nodes.map((rec: any) => (
