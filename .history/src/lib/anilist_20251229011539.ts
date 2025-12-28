@@ -32,7 +32,7 @@ export async function fetchAniList(query: string, variables: any = {}) {
       query,
       variables,
     }),
-    next: { revalidate: 3600 }, // Cache for 1 hour
+    next: { revalidate: 3600 } // Cache for 1 hour
   });
 
   const json = await response.json();

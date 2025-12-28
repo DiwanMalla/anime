@@ -32,7 +32,6 @@ export async function fetchAniList(query: string, variables: any = {}) {
       query,
       variables,
     }),
-    next: { revalidate: 3600 }, // Cache for 1 hour
   });
 
   const json = await response.json();
@@ -64,77 +63,6 @@ export const TRENDING_ANIME_QUERY = `
         description
         averageScore
         genres
-        format
-        episodes
-      }
-    }
-  }
-`;
-
-export const POPULAR_ANIME_QUERY = `
-  query ($page: Int, $perPage: Int) {
-    Page(page: $page, perPage: $perPage) {
-      media(sort: POPULARITY_DESC, type: ANIME) {
-        id
-        title {
-          romaji
-          english
-          native
-        }
-        coverImage {
-          large
-          medium
-        }
-        averageScore
-        genres
-        format
-        episodes
-      }
-    }
-  }
-`;
-
-export const UPCOMING_ANIME_QUERY = `
-  query ($page: Int, $perPage: Int) {
-    Page(page: $page, perPage: $perPage) {
-      media(sort: POPULARITY_DESC, type: ANIME, status: NOT_YET_RELEASED) {
-        id
-        title {
-          romaji
-          english
-          native
-        }
-        coverImage {
-          large
-          medium
-        }
-        averageScore
-        genres
-        format
-        episodes
-      }
-    }
-  }
-`;
-
-export const TOP_RATED_ANIME_QUERY = `
-  query ($page: Int, $perPage: Int) {
-    Page(page: $page, perPage: $perPage) {
-      media(sort: SCORE_DESC, type: ANIME) {
-        id
-        title {
-          romaji
-          english
-          native
-        }
-        coverImage {
-          large
-          medium
-        }
-        averageScore
-        genres
-        format
-        episodes
       }
     }
   }

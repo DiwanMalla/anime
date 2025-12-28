@@ -36,9 +36,7 @@ function SearchResults() {
   if (!query) {
     return (
       <div className="flex flex-col items-center justify-center h-[50vh] text-gray-500">
-        <p className="text-xl">
-          Type something in the search bar to find anime.
-        </p>
+        <p className="text-xl">Type something in the search bar to find anime.</p>
       </div>
     );
   }

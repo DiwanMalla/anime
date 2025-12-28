@@ -1,22 +1,21 @@
-import {
-  fetchAniList,
-  TRENDING_ANIME_QUERY,
-  POPULAR_ANIME_QUERY,
-  UPCOMING_ANIME_QUERY,
-  TOP_RATED_ANIME_QUERY,
+import { 
+  fetchAniList, 
+  TRENDING_ANIME_QUERY, 
+  POPULAR_ANIME_QUERY, 
+  UPCOMING_ANIME_QUERY, 
+  TOP_RATED_ANIME_QUERY 
 } from "@/lib/anilist";
 import AnimeCard from "@/components/AnimeCard";
 import Link from "next/link";
 import { Play, Info, ChevronRight } from "lucide-react";
 
 export default async function Home() {
-  const [trendingData, popularData, upcomingData, topRatedData] =
-    await Promise.all([
-      fetchAniList(TRENDING_ANIME_QUERY, { page: 1, perPage: 20 }),
-      fetchAniList(POPULAR_ANIME_QUERY, { page: 1, perPage: 20 }),
-      fetchAniList(UPCOMING_ANIME_QUERY, { page: 1, perPage: 20 }),
-      fetchAniList(TOP_RATED_ANIME_QUERY, { page: 1, perPage: 20 }),
-    ]);
+  const [trendingData, popularData, upcomingData, topRatedData] = await Promise.all([
+    fetchAniList(TRENDING_ANIME_QUERY, { page: 1, perPage: 20 }),
+    fetchAniList(POPULAR_ANIME_QUERY, { page: 1, perPage: 20 }),
+    fetchAniList(UPCOMING_ANIME_QUERY, { page: 1, perPage: 20 }),
+    fetchAniList(TOP_RATED_ANIME_QUERY, { page: 1, perPage: 20 }),
+  ]);
 
   const trending = trendingData?.Page?.media || [];
   const popular = popularData?.Page?.media || [];
@@ -45,16 +44,16 @@ export default async function Home() {
               {heroAnime.title?.english || heroAnime.title?.romaji}
             </h1>
             <p className="text-lg text-gray-200 mb-6 line-clamp-3 drop-shadow-md">
-              {heroAnime.description?.replace(/<[^>]*>/g, "")}
+              {heroAnime.description?.replace(/<[^>]*>/g, '')}
             </p>
             <div className="flex items-center gap-4">
-              <Link
+              <Link 
                 href={`/anime/${heroAnime.id}`}
                 className="flex items-center gap-2 bg-white text-black px-8 py-3 rounded font-bold hover:bg-gray-200 transition"
               >
                 <Play className="h-5 w-5 fill-black" /> Play
               </Link>
-              <Link
+              <Link 
                 href={`/anime/${heroAnime.id}`}
                 className="flex items-center gap-2 bg-gray-500/70 text-white px-8 py-3 rounded font-bold hover:bg-gray-500/50 transition backdrop-blur-sm"
               >
@@ -75,9 +74,9 @@ export default async function Home() {
   );
 }
 
-function AnimeRow({ title, items }: { title: string; items: any[] }) {
+function AnimeRow({ title, items }: { title: string, items: any[] }) {
   if (!items || items.length === 0) return null;
-
+  
   return (
     <section>
       <h2 className="text-xl md:text-2xl font-semibold mb-4 text-gray-100 hover:text-white cursor-pointer flex items-center gap-2 group">
