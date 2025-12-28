@@ -21,10 +21,7 @@ export default async function Home() {
       <section className="relative h-[70vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img
-            src={
-              trendingAnime[0]?.bannerImage ||
-              "https://images.unsplash.com/photo-1578632292335-df3abbb0d586?auto=format&fit=crop&q=80&w=2000"
-            }
+            src={trendingAnime[0]?.bannerImage || "https://images.unsplash.com/photo-1578632292335-df3abbb0d586?auto=format&fit=crop&q=80&w=2000"}
             alt="Hero Banner"
             className="w-full h-full object-cover opacity-30"
           />
@@ -36,8 +33,7 @@ export default async function Home() {
             Explore the World of Anime
           </h1>
           <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-            Discover trending series, search for your favorites, and stay
-            updated with the latest releases.
+            Discover trending series, search for your favorites, and stay updated with the latest releases.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link
