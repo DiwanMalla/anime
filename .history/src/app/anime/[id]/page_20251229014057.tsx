@@ -175,7 +175,7 @@ export default async function AnimeDetailsPage({ params }: PageProps) {
                       className="flex items-center gap-3 text-sm text-gray-300 hover:text-white transition group bg-white/5 p-3 rounded border hover:brightness-125"
                       style={{
                         borderColor: link.color || "#333",
-                        boxShadow: `0 0 10px ${link.color}20`,
+                        boxShadow: `0 0 10px ${link.color}20`
                       }}
                     >
                       {link.icon ? (
@@ -187,7 +187,7 @@ export default async function AnimeDetailsPage({ params }: PageProps) {
                       ) : (
                         <div className="w-8 h-8 bg-gray-700 rounded-sm" />
                       )}
-                      <span
+                      <span 
                         className="font-mono uppercase tracking-wide font-bold"
                         style={{ color: link.color || "#fff" }}
                       >
@@ -234,13 +234,9 @@ export default async function AnimeDetailsPage({ params }: PageProps) {
               <div className="mb-8 p-4 bg-[#00f3ff]/5 border border-[#00f3ff]/30 rounded-lg flex items-center gap-4 animate-pulse">
                 <Clock className="h-6 w-6 text-[#00f3ff]" />
                 <div>
-                  <div className="text-[#00f3ff] font-mono text-sm uppercase tracking-widest">
-                    Next Transmission
-                  </div>
+                  <div className="text-[#00f3ff] font-mono text-sm uppercase tracking-widest">Next Transmission</div>
                   <div className="text-white font-bold">
-                    Episode {anime.nextAiringEpisode.episode} airing in{" "}
-                    {Math.ceil(anime.nextAiringEpisode.timeUntilAiring / 86400)}{" "}
-                    days
+                    Episode {anime.nextAiringEpisode.episode} airing in {Math.ceil(anime.nextAiringEpisode.timeUntilAiring / 86400)} days
                   </div>
                 </div>
               </div>
@@ -353,12 +349,8 @@ export default async function AnimeDetailsPage({ params }: PageProps) {
                         className="w-12 h-12 rounded-full object-cover grayscale hover:grayscale-0 transition-all"
                       />
                       <div className="flex flex-col">
-                        <span className="text-sm font-medium text-white">
-                          {staff.node.name.full}
-                        </span>
-                        <span className="text-xs text-gray-500 font-mono uppercase">
-                          {staff.role}
-                        </span>
+                        <span className="text-sm font-medium text-white">{staff.node.name.full}</span>
+                        <span className="text-xs text-gray-500 font-mono uppercase">{staff.role}</span>
                       </div>
                     </div>
                   ))}
