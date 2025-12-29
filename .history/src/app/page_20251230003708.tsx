@@ -64,13 +64,6 @@ export default async function Home() {
           </div>
         </div>
       )}
-
-      <div className="relative z-20 -mt-32 space-y-12 px-4 md:px-12">
-        <AnimeRow title="Trending Now" items={trending} />
-        <AnimeRow title="Popular on AniVerse" items={popular} />
-        <AnimeRow title="Top Rated" items={topRated} />
-        <AnimeRow title="Upcoming Releases" items={upcoming} />
-      </div>
     </main>
   );
 }
@@ -87,7 +80,7 @@ function AnimeRow({ title, items }: { title: string; items: any[] }) {
         </span>
       </h2>
       <div className="relative group">
-        <div className="flex gap-4 overflow-x-auto pb-4 scroll-smooth pr-4 md:pr-12 -mr-4 md:-mr-12 hide-scrollbar">
+        <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide scroll-smooth pr-4 md:pr-12 -mr-4 md:-mr-12">
           {items.map((anime) => (
             <div key={anime.id} className="flex-none w-[200px] md:w-[240px]">
               <AnimeCard anime={anime} />

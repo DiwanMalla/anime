@@ -33,19 +33,19 @@ export default function AnimeCard({ anime }: AnimeCardProps) {
       animate={{ opacity: 1, y: 0 }}
       whileHover={{ y: -8, scale: 1.02 }}
       transition={{ duration: 0.3, ease: "easeOut" }}
-      className="anime-card"
+      className="anime-card group"
     >
       <Link href={`/anime/${anime.id}`} className="block relative">
         {/* Glow Effect */}
         <div
-          className="absolute -inset-2 rounded-xl opacity-0 hover:opacity-60 blur-xl transition-opacity duration-500"
+          className="absolute -inset-2 rounded-xl opacity-0 group-hover:opacity-60 blur-xl transition-opacity duration-500"
           style={{
             background: `linear-gradient(135deg, ${accentColor}, #c44eff)`,
           }}
         />
 
         {/* Card Container */}
-        <div className="relative bg-[#1a0a2e] rounded-xl overflow-hidden border-2 border-white/10 hover:border-[#ff6b9d]/50 transition-all duration-300">
+        <div className="relative bg-[#1a0a2e] rounded-xl overflow-hidden border-2 border-white/10 group-hover:border-[#ff6b9d]/50 transition-all duration-300">
           {/* Image Container */}
           <div className="relative h-[280px] w-full overflow-hidden">
             <img
@@ -58,8 +58,8 @@ export default function AnimeCard({ anime }: AnimeCardProps) {
             <div className="absolute inset-0 bg-gradient-to-t from-[#0a0014] via-transparent to-transparent opacity-90" />
 
             {/* Play Button on Hover */}
-            <div className="absolute inset-0 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
-              <div className="w-16 h-16 rounded-full bg-[#ff6b9d]/90 flex items-center justify-center backdrop-blur-sm transform scale-0 hover:scale-100 transition-transform duration-300">
+            <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <div className="w-16 h-16 rounded-full bg-[#ff6b9d]/90 flex items-center justify-center backdrop-blur-sm transform scale-0 group-hover:scale-100 transition-transform duration-300">
                 <Play className="h-8 w-8 text-white fill-white ml-1" />
               </div>
             </div>
@@ -80,12 +80,12 @@ export default function AnimeCard({ anime }: AnimeCardProps) {
             )}
 
             {/* Sparkle Decorations */}
-            <Sparkles className="absolute bottom-16 right-4 h-4 w-4 text-[#ffd93d] opacity-0 hover:opacity-100 transition-opacity sparkle" />
+            <Sparkles className="absolute bottom-16 right-4 h-4 w-4 text-[#ffd93d] opacity-0 group-hover:opacity-100 transition-opacity sparkle" />
           </div>
 
           {/* Content */}
           <div className="p-4 relative">
-            <h3 className="text-white font-bold text-base truncate hover:text-[#ff6b9d] transition-colors mt-1">
+            <h3 className="text-white font-bold text-base truncate group-hover:text-[#ff6b9d] transition-colors mt-1">
               {title}
             </h3>
             <div className="flex items-center gap-2 mt-2 text-xs text-gray-400">
