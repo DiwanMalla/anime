@@ -70,7 +70,7 @@ export default async function Home() {
         <AnimeRow title="Trending Now" items={trending} />
         <AnimeRow title="Popular on AniVerse" items={popular} />
         <AnimeRow title="Upcoming Releases" items={upcoming} />
-
+        
         <TopAnimeList animeList={topRated} />
       </div>
     </main>

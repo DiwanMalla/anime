@@ -34,29 +34,29 @@ export default function AnimeCard({ anime }: AnimeCardProps) {
       animate={{ opacity: 1, scale: 1 }}
       whileHover={{ y: -10 }}
       transition={{ duration: 0.4, ease: [0.23, 1, 0.32, 1] }}
-      className="relative"
+      className="relative group"
     >
       <Link href={`/anime/${anime.id}`} className="block">
         {/* Premium Glow Effect */}
         <div
-          className="absolute -inset-1 rounded-2xl opacity-0 hover:opacity-40 blur-2xl transition-all duration-500"
+          className="absolute -inset-1 rounded-2xl opacity-0 group-hover:opacity-40 blur-2xl transition-all duration-500"
           style={{
             background: `linear-gradient(135deg, ${accentColor}, #c44eff, #4ecaff)`,
           }}
         />
 
         {/* Main Card */}
-        <div className="relative bg-[#1a0a2e]/80 backdrop-blur-md rounded-2xl overflow-hidden border border-white/10 hover:border-white/20 transition-all duration-500 shadow-2xl">
+        <div className="relative bg-[#1a0a2e]/80 backdrop-blur-md rounded-2xl overflow-hidden border border-white/10 group-hover:border-white/20 transition-all duration-500 shadow-2xl">
           {/* Image Section */}
           <div className="relative aspect-[2/3] w-full overflow-hidden">
             <img
               src={anime.coverImage.large}
               alt={title}
-              className="object-cover w-full h-full transition-transform duration-1000 hover:scale-110 hover:rotate-1"
+              className="object-cover w-full h-full transition-transform duration-1000 group-hover:scale-110 group-hover:rotate-1"
             />
 
             {/* Dynamic Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0a0014] via-[#0a0014]/20 to-transparent opacity-80 hover:opacity-60 transition-opacity duration-500" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0a0014] via-[#0a0014]/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity duration-500" />
 
             {/* Floating Badges */}
             <div className="absolute top-3 left-3 flex flex-col gap-2">
@@ -77,7 +77,7 @@ export default function AnimeCard({ anime }: AnimeCardProps) {
             )}
 
             {/* Play Button Overlay */}
-            <div className="absolute inset-0 flex items-center justify-center opacity-0 hover:opacity-100 transition-all duration-500 scale-90 hover:scale-100">
+            <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 scale-90 group-hover:scale-100">
               <div
                 className="w-14 h-14 rounded-full flex items-center justify-center backdrop-blur-xl border border-white/20 shadow-2xl"
                 style={{
@@ -89,12 +89,12 @@ export default function AnimeCard({ anime }: AnimeCardProps) {
             </div>
 
             {/* Sparkles on Hover */}
-            <Sparkles className="absolute bottom-4 right-4 h-5 w-5 text-yellow-300 opacity-0 hover:opacity-100 transition-all duration-700 hover:rotate-12" />
+            <Sparkles className="absolute bottom-4 right-4 h-5 w-5 text-yellow-300 opacity-0 group-hover:opacity-100 transition-all duration-700 group-hover:rotate-12" />
           </div>
 
           {/* Content Section */}
           <div className="p-4 space-y-3">
-            <h3 className="text-white font-bold text-sm md:text-base line-clamp-2 hover:text-purple-400 transition-colors duration-300 min-h-[2.5rem]">
+            <h3 className="text-white font-bold text-sm md:text-base line-clamp-2 group-hover:text-purple-400 transition-colors duration-300 min-h-[2.5rem]">
               {title}
             </h3>
 
