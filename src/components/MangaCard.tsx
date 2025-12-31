@@ -29,6 +29,9 @@ interface MangaCardProps {
     status?: string;
     format?: string;
     genres?: string[];
+    startDate?: {
+      year?: number;
+    };
   };
 }
 
@@ -133,9 +136,15 @@ export default function MangaCard({ manga }: MangaCardProps) {
               ))}
             </div>
 
-            <div className="flex items-center justify-between pt-2 border-t border-foreground/5">
+            <div className="flex items-center justify-between pt-2 border-t border-foreground/5 font-mono">
               <div className="flex items-center gap-1.5 text-foreground/50">
-                <BookOpen className="h-3 w-3" />
+                <Calendar className="h-3 w-3" />
+                <span className="text-[10px] font-medium">
+                  {manga.startDate?.year || "?"}
+                </span>
+              </div>
+              <div className="flex items-center gap-1.5 text-foreground/50">
+                <Layers className="h-3 w-3" />
                 <span className="text-[10px] font-medium">
                   {manga.chapters || "?"} CH
                 </span>

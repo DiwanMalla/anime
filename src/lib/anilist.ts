@@ -214,6 +214,9 @@ export const SEARCH_MANGA_QUERY = `
         status
         chapters
         volumes
+        startDate {
+          year
+        }
       }
     }
   }
@@ -276,7 +279,11 @@ export const TRENDING_MANGA_QUERY = `
         averageScore
         genres
         format
+        status
         chapters
+        startDate {
+          year
+        }
       }
     }
   }
@@ -300,7 +307,11 @@ export const POPULAR_MANGA_QUERY = `
         averageScore
         genres
         format
+        status
         chapters
+        startDate {
+          year
+        }
       }
     }
   }
@@ -399,8 +410,16 @@ export const MANGA_DETAILS_QUERY = `
             }
             coverImage {
               large
+              color
             }
             averageScore
+            genres
+            status
+            format
+            chapters
+            startDate {
+              year
+            }
           }
         }
       }
@@ -557,6 +576,7 @@ export const ANIME_DETAILS_QUERY = `
             }
             coverImage {
               large
+              color
             }
             averageScore
             genres

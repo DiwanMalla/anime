@@ -139,17 +139,20 @@ export default function MangaReader({
             : "flex items-center justify-center"
         } scrollbar-hide`}
         onClick={() => {
-            if (readingMode === "horizontal") {
-                 // Click left side for next (RTL for manga), right for prev? 
-                 // Standard web reader: Click right for next.
-                 // Let's implement click zones.
-            }
+          if (readingMode === "horizontal") {
+            // Click left side for next (RTL for manga), right for prev?
+            // Standard web reader: Click right for next.
+            // Let's implement click zones.
+          }
         }}
       >
         {readingMode === "vertical" ? (
           <div
             className="w-full max-w-3xl space-y-2 px-2"
-            style={{ transform: `scale(${scale})`, transformOrigin: "top center" }}
+            style={{
+              transform: `scale(${scale})`,
+              transformOrigin: "top center",
+            }}
           >
             {MOCK_PAGES.map((page) => (
               <img
@@ -160,38 +163,38 @@ export default function MangaReader({
                 loading="lazy"
               />
             ))}
-            
+
             {/* Chapter Navigation Footer */}
-             <div className="flex justify-center gap-4 py-8">
-                <button 
-                    disabled={!hasPrev}
-                    onClick={onPrevChapter}
-                    className="px-6 py-3 bg-white/10 hover:bg-white/20 rounded-full text-white font-bold disabled:opacity-50"
-                >
-                    Previous Chapter
-                </button>
-                <button 
-                     disabled={!hasNext}
-                     onClick={onNextChapter}
-                     className="px-6 py-3 bg-anime-pink hover:bg-anime-pink/80 rounded-full text-white font-bold disabled:opacity-50"
-                >
-                    Next Chapter
-                </button>
+            <div className="flex justify-center gap-4 py-8">
+              <button
+                disabled={!hasPrev}
+                onClick={onPrevChapter}
+                className="px-6 py-3 bg-white/10 hover:bg-white/20 rounded-full text-white font-bold disabled:opacity-50"
+              >
+                Previous Chapter
+              </button>
+              <button
+                disabled={!hasNext}
+                onClick={onNextChapter}
+                className="px-6 py-3 bg-anime-pink hover:bg-anime-pink/80 rounded-full text-white font-bold disabled:opacity-50"
+              >
+                Next Chapter
+              </button>
             </div>
           </div>
         ) : (
           /* Horizontal Mode */
           <div className="relative w-full h-full flex items-center justify-center p-4">
-             {/* Click Zones */}
-            <div 
-                className="absolute left-0 top-0 bottom-0 w-1/3 z-10 cursor-w-resize"
-                onClick={() => handlePageChange("prev")}
+            {/* Click Zones */}
+            <div
+              className="absolute left-0 top-0 bottom-0 w-1/3 z-10 cursor-w-resize"
+              onClick={() => handlePageChange("prev")}
             />
-            <div 
-                className="absolute right-0 top-0 bottom-0 w-1/3 z-10 cursor-e-resize"
-                onClick={() => handlePageChange("next")}
+            <div
+              className="absolute right-0 top-0 bottom-0 w-1/3 z-10 cursor-e-resize"
+              onClick={() => handlePageChange("next")}
             />
-            
+
             <img
               src={MOCK_PAGES[currentPage].url}
               alt={`Page ${currentPage + 1}`}
@@ -203,33 +206,47 @@ export default function MangaReader({
       </div>
 
       {/* Bottom Progress Bar */}
-       <div
+      <div
         className={`absolute bottom-0 left-0 right-0 bg-black/80 backdrop-blur-md p-4 flex items-center justify-between z-50 transition-transform duration-300 ${
           showControls ? "translate-y-0" : "translate-y-full"
         }`}
       >
         {readingMode === "horizontal" && (
-             <div className="flex-1 flex items-center justify-center gap-4 text-white">
-                 <button onClick={() => handlePageChange("prev")} disabled={currentPage === 0}>
-                     <ChevronLeft />
-                 </button>
-                 <span className="font-mono text-sm">
-                     Page {currentPage + 1} / {MOCK_PAGES.length}
-                 </span>
-                 <button onClick={() => handlePageChange("next")} disabled={currentPage === MOCK_PAGES.length - 1}>
-                     <ChevronRight />
-                 </button>
-             </div>
+          <div className="flex-1 flex items-center justify-center gap-4 text-white">
+            <button
+              onClick={() => handlePageChange("prev")}
+              disabled={currentPage === 0}
+            >
+              <ChevronLeft />
+            </button>
+            <span className="font-mono text-sm">
+              Page {currentPage + 1} / {MOCK_PAGES.length}
+            </span>
+            <button
+              onClick={() => handlePageChange("next")}
+              disabled={currentPage === MOCK_PAGES.length - 1}
+            >
+              <ChevronRight />
+            </button>
+          </div>
         )}
 
         <div className="flex items-center gap-4 ml-auto">
-            <button onClick={() => setScale(s => Math.max(0.5, s - 0.1))} className="text-white hover:text-anime-pink">
-                <ZoomOut className="w-5 h-5" />
-            </button>
-             <span className="text-white text-xs font-mono w-12 text-center">{Math.round(scale * 100)}%</span>
-            <button onClick={() => setScale(s => Math.min(2, s + 0.1))} className="text-white hover:text-anime-pink">
-                <ZoomIn className="w-5 h-5" />
-            </button>
+          <button
+            onClick={() => setScale((s) => Math.max(0.5, s - 0.1))}
+            className="text-white hover:text-anime-pink"
+          >
+            <ZoomOut className="w-5 h-5" />
+          </button>
+          <span className="text-white text-xs font-mono w-12 text-center">
+            {Math.round(scale * 100)}%
+          </span>
+          <button
+            onClick={() => setScale((s) => Math.min(2, s + 0.1))}
+            className="text-white hover:text-anime-pink"
+          >
+            <ZoomIn className="w-5 h-5" />
+          </button>
         </div>
       </div>
     </div>
