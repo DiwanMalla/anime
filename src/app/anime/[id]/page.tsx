@@ -21,6 +21,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import WatchlistButton from "@/components/WatchlistButton";
 import CommunityLayer from "@/components/CommunityLayer";
+import DetailTabs from "@/components/DetailTabs";
 
 interface PageProps {
   params: Promise<{ id: string }>;
@@ -352,229 +353,234 @@ export default async function AnimeDetailsPage({ params }: PageProps) {
                 ))}
             </div>
 
-            <div className="mb-12 relative">
-              <div className="absolute -left-4 top-0 bottom-0 w-1 bg-gradient-to-b from-anime-blue to-transparent opacity-50" />
-              <h3 className="text-xl font-mono text-foreground/40 mb-4 uppercase tracking-widest">
-                Synopsis
-              </h3>
-              <div
-                className="text-foreground/80 leading-relaxed max-w-4xl text-lg font-light"
-                dangerouslySetInnerHTML={{ __html: anime.description }}
-              />
-            </div>
-
-            {/* Relations Section */}
-            {anime.relations?.edges?.length > 0 && (
-              <div className="mb-12">
-                <h3 className="text-xl font-mono text-anime-blue mb-6 flex items-center gap-2 uppercase tracking-widest">
-                  <Layers className="h-5 w-5" /> Related Seasons & Spin-offs
-                </h3>
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-                  {anime.relations.edges.map((edge: any) => (
-                    <Link
-                      key={edge.node.id}
-                      href={`/anime/${edge.node.id}`}
-                      className="group relative aspect-[2/3] rounded overflow-hidden border border-foreground/10 hover:border-anime-blue/50 transition-all"
-                    >
-                      <img
-                        src={edge.node.coverImage.large}
-                        alt={edge.node.title.userPreferred}
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-80" />
-                      <div className="absolute bottom-0 left-0 p-2 w-full">
-                        <div className="text-[10px] font-mono text-anime-blue uppercase tracking-tighter mb-1">
-                          {edge.relationType.replace(/_/g, " ")}
-                        </div>
-                        <div className="text-xs font-bold text-white truncate">
-                          {edge.node.title.userPreferred}
-                        </div>
-                        <div className="text-[10px] text-gray-300 uppercase">
-                          {edge.node.format} • {edge.node.status}
-                        </div>
-                      </div>
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Episode List */}
-            {anime.streamingEpisodes?.length > 0 && (
-              <div className="mb-12">
-                <h3 className="text-xl font-mono text-anime-purple mb-6 flex items-center gap-2 uppercase tracking-widest">
-                  <PlayCircle className="h-5 w-5" /> Episodes
-                </h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-4xl">
-                  {anime.streamingEpisodes.map((ep: any, i: number) => (
-                    <a
-                      key={i}
-                      href={ep.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex gap-4 bg-anime-dark/50 border border-foreground/10 p-2 rounded hover:border-anime-purple/50 transition-all group"
-                    >
-                      <div className="relative w-32 h-20 flex-shrink-0 overflow-hidden rounded">
-                        <img
-                          src={ep.thumbnail}
-                          alt={ep.title}
-                          className="w-full h-full object-cover group-hover:scale-110 transition-transform"
-                        />
-                        <div className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity">
-                          <PlayCircle className="h-8 w-8 text-white" />
-                        </div>
-                      </div>
-                      <div className="flex flex-col justify-center min-w-0">
-                        <div className="text-sm font-bold text-foreground truncate group-hover:text-anime-purple transition-colors">
-                          {ep.title}
-                        </div>
-                        <div className="text-xs text-foreground/50 font-mono uppercase mt-1">
-                          {ep.site}
-                        </div>
-                      </div>
-                    </a>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Trailer Section */}
-            {anime.trailer?.site === "youtube" && (
-              <div className="mb-12">
-                <h3 className="text-xl font-mono text-[#00f3ff] mb-6 flex items-center gap-2 uppercase tracking-widest">
-                  <Clapperboard className="h-5 w-5" /> Visual Feed
-                </h3>
-                <div className="aspect-video w-full max-w-4xl bg-black rounded-lg overflow-hidden border border-gray-800 shadow-[0_0_30px_rgba(0,0,0,0.5)] relative group">
-                  <div className="absolute inset-0 border border-[#00f3ff]/20 pointer-events-none z-10 rounded-lg" />
-                  <iframe
-                    src={`https://www.youtube.com/embed/${anime.trailer.id}`}
-                    title="YouTube video player"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                    className="w-full h-full"
-                  />
-                </div>
-              </div>
-            )}
-
-            {/* Characters Section */}
-            {anime.characters?.edges?.length > 0 && (
-              <div className="mb-12">
-                <h3 className="text-xl font-mono text-anime-purple mb-6 flex items-center gap-2 uppercase tracking-widest">
-                  <Users className="h-5 w-5" /> Characters
-                </h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-[1400px]">
-                  {anime.characters.edges.map((char: any) => (
+            <DetailTabs
+              overview={
+                <div className="space-y-12">
+                  <div className="relative">
+                    <div className="absolute -left-4 top-0 bottom-0 w-1 bg-gradient-to-b from-anime-blue to-transparent opacity-50" />
+                    <h3 className="text-xl font-mono text-foreground/40 mb-4 uppercase tracking-widest">
+                      Synopsis Overview
+                    </h3>
                     <div
-                      key={char.node.id}
-                      className="flex justify-between bg-anime-dark/50 border border-foreground/10 rounded hover:border-anime-purple/50 transition-colors p-2 h-24"
-                    >
-                      {/* Character (Left) */}
+                      className="text-foreground/80 leading-relaxed max-w-4xl text-lg font-light"
+                      dangerouslySetInnerHTML={{ __html: anime.description }}
+                    />
+                  </div>
+
+                  {/* Trailer */}
+                  {anime.trailer?.site === "youtube" && (
+                    <div className="mt-8">
+                      <h3 className="text-xl font-mono text-[#00f3ff] mb-6 flex items-center gap-2 uppercase tracking-widest">
+                        <Clapperboard className="h-5 w-5" /> Visual Feed (Trailer)
+                      </h3>
+                      <div className="aspect-video w-full max-w-4xl bg-black rounded-lg overflow-hidden border border-gray-800 shadow-[0_0_30px_rgba(0,0,0,0.5)] relative group">
+                        <div className="absolute inset-0 border border-[#00f3ff]/20 pointer-events-none z-10 rounded-lg" />
+                        <iframe
+                          src={`https://www.youtube.com/embed/${anime.trailer.id}`}
+                          title="YouTube video player"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowFullScreen
+                          className="w-full h-full"
+                        />
+                      </div>
+                    </div>
+                  )}
+                </div>
+              }
+              episodes={
+                <div className="space-y-8">
+                  {anime.streamingEpisodes?.length > 0 ? (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-4xl">
+                      {anime.streamingEpisodes.map((ep: any, i: number) => (
+                        <a
+                          key={i}
+                          href={ep.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex gap-4 bg-anime-dark/50 border border-foreground/10 p-2 rounded hover:border-anime-purple/50 transition-all group"
+                        >
+                          <div className="relative w-32 h-20 flex-shrink-0 overflow-hidden rounded">
+                            <img
+                              src={ep.thumbnail}
+                              alt={ep.title}
+                              className="w-full h-full object-cover group-hover:scale-110 transition-transform"
+                            />
+                            <div className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity">
+                              <PlayCircle className="h-8 w-8 text-white" />
+                            </div>
+                            <div className="absolute bottom-1 right-1 bg-black/80 px-1.5 py-0.5 rounded text-[10px] font-mono text-white">
+                              {ep.site}
+                            </div>
+                          </div>
+                          <div className="flex flex-col justify-center min-w-0">
+                            <div className="text-sm font-bold text-foreground truncate group-hover:text-anime-purple transition-colors">
+                              {ep.title}
+                            </div>
+                            <div className="text-[10px] text-foreground/40 font-mono uppercase mt-1">
+                              Streaming Source Available
+                            </div>
+                          </div>
+                        </a>
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="p-12 text-center text-foreground/40 font-mono uppercase tracking-widest border border-dashed border-white/10 rounded max-w-4xl">
+                      No streaming sources found on AniList
+                    </div>
+                  )}
+
+                  {/* If streaming episodes < total episodes, show a hint */}
+                  {anime.episodes > (anime.streamingEpisodes?.length || 0) && (
+                    <div className="bg-white/5 border border-white/10 p-4 rounded-lg flex items-center gap-4 max-w-4xl">
+                      <div className="w-2 h-2 rounded-full bg-anime-blue animate-pulse" />
+                      <p className="text-xs font-mono text-foreground/60 uppercase tracking-wider">
+                        Total Transmission: {anime.episodes} Episodes. Some metadata might be restricted by source.
+                      </p>
+                    </div>
+                  )}
+                </div>
+              }
+              cast={
+                <div className="space-y-12">
+                  {anime.characters?.edges?.length > 0 && (
+                    <div>
+                      <h3 className="text-xl font-mono text-anime-purple mb-6 flex items-center gap-2 uppercase tracking-widest">
+                        <Users className="h-5 w-5" /> Characters & Voice Actors
+                      </h3>
+                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 max-w-4xl">
+                        {anime.characters.edges.map((char: any) => (
+                          <div
+                            key={char.node.id}
+                            className="flex justify-between bg-anime-dark/50 border border-foreground/10 rounded hover:border-anime-purple/50 transition-colors p-2 h-24"
+                          >
+                            <Link href={`/character/${char.node.id}`} className="flex gap-3 h-full group/char">
+                              <img
+                                src={char.node.image.large || char.node.image.medium}
+                                alt={char.node.name.full}
+                                className="w-16 h-full object-cover rounded group-hover/char:opacity-80 transition-opacity"
+                              />
+                              <div className="flex flex-col justify-center">
+                                <div className="text-sm font-bold text-foreground line-clamp-1 leading-tight group-hover/char:text-anime-purple transition-colors">
+                                  {char.node.name.full}
+                                </div>
+                                <div className="text-xs text-foreground/50 font-mono uppercase mt-1">
+                                  {char.role}
+                                </div>
+                              </div>
+                            </Link>
+
+                            {char.voiceActors?.[0] && (
+                              <Link href={`/staff/${char.voiceActors[0].id}`} className="flex gap-3 h-full text-right group/staff">
+                                <div className="flex flex-col justify-center items-end text-right">
+                                  <div className="text-sm font-bold text-foreground line-clamp-1 leading-tight group-hover/staff:text-anime-purple transition-colors">
+                                    {char.voiceActors[0].name.full}
+                                  </div>
+                                  <div className="text-[10px] text-foreground/50 font-mono uppercase mt-1">
+                                    Japanese
+                                  </div>
+                                </div>
+                                <img
+                                  src={char.voiceActors[0].image.large || char.voiceActors[0].image.medium}
+                                  alt={char.voiceActors[0].name.full}
+                                  className="w-16 h-full object-cover rounded group-hover/staff:opacity-80 transition-opacity"
+                                />
+                              </Link>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {anime.staff?.edges?.length > 0 && (
+                    <div>
+                      <h3 className="text-xl font-mono text-foreground mb-6 flex items-center gap-2 uppercase tracking-widest">
+                        <Users className="h-5 w-5" /> Core Staff
+                      </h3>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4 max-w-4xl">
+                        {anime.staff.edges.map((staff: any, index: number) => (
+                          <Link
+                            key={`${staff.node.id}-${staff.role}-${index}`}
+                            href={`/staff/${staff.node.id}`}
+                            className="flex items-center gap-4 bg-anime-dark/50 border border-foreground/10 p-3 rounded hover:border-anime-purple/30 transition-colors h-20 group"
+                          >
+                            <img
+                              src={staff.node.image.large || staff.node.image.medium}
+                              alt={staff.node.name.full}
+                              className="w-12 h-full object-cover rounded group-hover:opacity-80 transition-opacity"
+                            />
+                            <div className="flex flex-col justify-center min-w-0">
+                              <div className="text-xs font-bold text-foreground truncate group-hover:text-anime-purple transition-colors">
+                                {staff.node.name.full}
+                              </div>
+                              <div className="text-[10px] text-anime-purple font-mono uppercase mt-1 truncate">
+                                {staff.role}
+                              </div>
+                            </div>
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              }
+              related={
+                anime.relations?.edges?.length > 0 ? (
+                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                    {anime.relations.edges.map((edge: any) => (
                       <Link
-                        href={`/character/${char.node.id}`}
-                        className="flex gap-3 h-full group/char"
+                        key={edge.node.id}
+                        href={`/anime/${edge.node.id}`}
+                        className="group relative aspect-[2/3] rounded overflow-hidden border border-foreground/10 hover:border-anime-blue/50 transition-all"
                       >
                         <img
-                          src={char.node.image.large || char.node.image.medium}
-                          alt={char.node.name.full}
-                          className="w-14 h-full object-cover rounded group-hover/char:opacity-80 transition-opacity"
+                          src={edge.node.coverImage.large}
+                          alt={edge.node.title.userPreferred}
+                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                         />
-                        <div className="flex flex-col justify-center">
-                          <div className="text-sm font-bold text-foreground line-clamp-2 leading-tight group-hover/char:text-anime-purple transition-colors">
-                            {char.node.name.full}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-80" />
+                        <div className="absolute bottom-0 left-0 p-2 w-full">
+                          <div className="text-[10px] font-mono text-anime-blue uppercase tracking-tighter mb-1">
+                            {edge.relationType.replace(/_/g, " ")}
                           </div>
-                          <div className="text-xs text-foreground/50 font-mono uppercase mt-1">
-                            {char.role}
+                          <div className="text-xs font-bold text-white truncate">
+                            {edge.node.title.userPreferred}
+                          </div>
+                          <div className="text-[10px] text-gray-300 uppercase">
+                            {edge.node.format} • {edge.node.status}
                           </div>
                         </div>
                       </Link>
-
-                      {/* Voice Actor (Right) */}
-                      {char.voiceActors?.[0] && (
-                        <Link
-                          href={`/staff/${char.voiceActors[0].id}`}
-                          className="flex gap-3 h-full text-right group/staff"
-                        >
-                          <div className="flex flex-col justify-center items-end">
-                            <div className="text-sm font-bold text-foreground line-clamp-2 leading-tight group-hover/staff:text-anime-purple transition-colors">
-                              {char.voiceActors[0].name.full}
-                            </div>
-                            <div className="text-xs text-foreground/50 font-mono uppercase mt-1">
-                              Japanese
-                            </div>
-                          </div>
-                          <img
-                            src={
-                              char.voiceActors[0].image.large ||
-                              char.voiceActors[0].image.medium
-                            }
-                            alt={char.voiceActors[0].name.full}
-                            className="w-14 h-full object-cover rounded group-hover/staff:opacity-80 transition-opacity"
-                          />
-                        </Link>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Staff Section */}
-            {anime.staff?.edges?.length > 0 && (
-              <div className="mb-12">
-                <h3 className="text-xl font-mono text-foreground mb-6 flex items-center gap-2 uppercase tracking-widest">
-                  <Users className="h-5 w-5" /> Core System Architects
-                </h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-[1400px]">
-                  {anime.staff.edges.map((staff: any, index: number) => (
-                    <Link
-                      key={`${staff.node.id}-${staff.role}-${index}`}
-                      href={`/staff/${staff.node.id}`}
-                      className="flex items-center gap-4 bg-anime-dark/50 border border-foreground/10 p-3 rounded hover:border-anime-purple/30 transition-colors h-24 group"
-                    >
-                      <img
-                        src={staff.node.image.large || staff.node.image.medium}
-                        alt={staff.node.name.full}
-                        className="w-16 h-full object-cover rounded group-hover:opacity-80 transition-opacity"
+                    ))}
+                  </div>
+                ) : (
+                  <div className="p-12 text-center text-foreground/40 font-mono uppercase tracking-widest border border-dashed border-white/10 rounded">
+                    No related entries found
+                  </div>
+                )
+              }
+              recommended={
+                anime.recommendations?.nodes?.length > 0 ? (
+                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+                    {anime.recommendations.nodes.map((rec: any) => (
+                      <AnimeCard
+                        key={rec.mediaRecommendation.id}
+                        anime={rec.mediaRecommendation}
                       />
-                      <div className="flex flex-col justify-center min-w-0">
-                        <div className="text-sm font-bold text-foreground truncate group-hover:text-anime-purple transition-colors">
-                          {staff.node.name.full}
-                        </div>
-                        {staff.node.name.native && (
-                          <div className="text-xs text-foreground/40 font-mono truncate">
-                            {staff.node.name.native}
-                          </div>
-                        )}
-                        <div className="text-[10px] text-anime-purple font-mono uppercase mt-1 truncate">
-                          {staff.role}
-                        </div>
-                      </div>
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            )}
+                    ))}
+                  </div>
+                ) : (
+                  <div className="p-12 text-center text-foreground/40 font-mono uppercase tracking-widest border border-dashed border-white/10 rounded">
+                    No recommendations available
+                  </div>
+                )
+              }
+            />
 
-            {/* Community Section */}
-            <CommunityLayer mediaId={anime.id} mediaTitle={title} />
-
-            {/* Recommendations */}
-            {anime.recommendations?.nodes?.length > 0 && (
-              <div>
-                <h3 className="text-2xl font-mono text-foreground mb-8 uppercase tracking-widest border-l-4 border-anime-blue pl-4">
-                  Recommendations
-                </h3>
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
-                  {anime.recommendations.nodes.map((rec: any) => (
-                    <AnimeCard
-                      key={rec.mediaRecommendation.id}
-                      anime={rec.mediaRecommendation}
-                    />
-                  ))}
-                </div>
-              </div>
-            )}
+            {/* Community Section (Discuss) - Now below the tabs */}
+            <div className="mt-16 pt-16 border-t border-white/10">
+              <CommunityLayer mediaId={anime.id} mediaTitle={title} />
+            </div>
           </div>
         </div>
       </div>

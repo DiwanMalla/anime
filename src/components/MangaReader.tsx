@@ -99,19 +99,17 @@ export default function MangaReader({
           >
             <ArrowLeft className="w-6 h-6 text-foreground" />
           </Link>
-          <div>
-            <h1 className="text-foreground font-bold line-clamp-1">
+          <div className="hidden md:block">
+            <h1 className="text-foreground font-bold truncate max-w-xs">
               {mangaTitle}
             </h1>
             <p className="text-foreground/50 text-xs">Chapter {chapterId}</p>
           </div>
-        </div>
-          </Link>
-          <div className="hidden md:block">
-            <h1 className="text-white font-bold truncate max-w-xs">
+          <div className="md:hidden">
+            <h1 className="text-foreground font-bold line-clamp-1">
               {mangaTitle}
             </h1>
-            <p className="text-gray-400 text-xs">Chapter {chapterId}</p>
+            <p className="text-foreground/50 text-xs">Chapter {chapterId}</p>
           </div>
         </div>
 
@@ -122,11 +120,11 @@ export default function MangaReader({
                 readingMode === "vertical" ? "horizontal" : "vertical"
               )
             }
-            className="flex items-center gap-2 px-3 py-1.5 bg-white/10 hover:bg-white/20 rounded-lg text-xs font-mono text-white transition-colors"
+            className="flex items-center gap-2 px-3 py-1.5 bg-foreground/10 hover:bg-foreground/20 rounded-lg text-xs font-mono text-foreground transition-colors"
           >
             {readingMode === "vertical" ? "Vertical" : "Horizontal"} Mode
           </button>
-          <button className="p-2 hover:bg-white/10 rounded-full text-white">
+          <button className="p-2 hover:bg-foreground/10 rounded-full text-foreground">
             <Settings className="w-5 h-5" />
           </button>
         </div>

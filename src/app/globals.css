@@ -35,6 +35,12 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-anime-pink: var(--anime-pink);
+  --color-anime-purple: var(--anime-purple);
+  --color-anime-blue: var(--anime-blue);
+  --color-anime-gold: var(--anime-gold);
+  --color-anime-red: var(--anime-red);
+  --color-anime-dark: var(--anime-dark);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }

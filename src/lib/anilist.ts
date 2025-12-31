@@ -560,6 +560,10 @@ export const ANIME_DETAILS_QUERY = `
             }
             averageScore
             genres
+            episodes
+            status
+            format
+            seasonYear
           }
         }
       }

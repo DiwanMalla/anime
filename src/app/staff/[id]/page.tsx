@@ -186,7 +186,7 @@ export default async function StaffPage({ params }: PageProps) {
                   ))}
                 </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
       </div>
