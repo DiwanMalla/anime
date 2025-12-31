@@ -10,8 +10,8 @@ interface TopAnimeListProps {
 export default function TopAnimeList({ animeList }: TopAnimeListProps) {
   return (
     <section className="py-12">
-      <div className="flex items-center justify-between mb-8 border-b border-white/10 pb-4">
-        <h2 className="text-2xl md:text-3xl font-bold text-white">
+      <div className="flex items-center justify-between mb-8 border-b border-foreground/10 pb-4">
+        <h2 className="text-2xl md:text-3xl font-bold text-foreground">
           Top 100 Anime
         </h2>
         <Link
@@ -40,11 +40,11 @@ export default function TopAnimeList({ animeList }: TopAnimeListProps) {
             <Link
               key={anime.id}
               href={`/anime/${anime.id}`}
-              className="group grid grid-cols-1 md:grid-cols-12 gap-4 items-center bg-[#1a0a2e]/20 hover:bg-[#1a0a2e]/60 border border-white/5 hover:border-blue-500/30 px-4 md:px-6 py-4 rounded-xl transition-all duration-300"
+              className="group grid grid-cols-1 md:grid-cols-12 gap-4 items-center bg-anime-dark/20 hover:bg-anime-dark/60 border border-foreground/5 hover:border-blue-500/30 px-4 md:px-6 py-4 rounded-xl transition-all duration-300"
             >
               {/* Rank */}
               <div className="col-span-1 flex items-center justify-center md:justify-start">
-                <span className="text-2xl font-black text-gray-700 group-hover:text-blue-400 transition-colors">
+                <span className="text-2xl font-black text-foreground/30 group-hover:text-blue-400 transition-colors">
                   {rank}
                 </span>
               </div>
@@ -59,7 +59,7 @@ export default function TopAnimeList({ animeList }: TopAnimeListProps) {
                   />
                 </div>
                 <div className="flex flex-col gap-1">
-                  <h3 className="font-bold text-white group-hover:text-blue-400 transition-colors line-clamp-1">
+                  <h3 className="font-bold text-foreground group-hover:text-blue-400 transition-colors line-clamp-1">
                     {title}
                   </h3>
                   <div className="flex flex-wrap gap-2">
@@ -86,7 +86,7 @@ export default function TopAnimeList({ animeList }: TopAnimeListProps) {
 
               {/* Format & Episodes */}
               <div className="col-span-1 md:col-span-2 flex flex-col items-center justify-center gap-1 text-sm">
-                <span className="text-gray-300 font-medium">
+                <span className="text-foreground/80 font-medium">
                   {anime.format === "TV" ? "TV Show" : anime.format}
                 </span>
                 <span className="text-xs text-gray-500">

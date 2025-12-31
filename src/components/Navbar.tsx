@@ -32,7 +32,7 @@ function ThemeToggle() {
   return (
     <button
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-      className="p-2 text-gray-400 hover:text-[#ff6b9d] transition-colors rounded-xl bg-white/5 border border-white/10"
+      className="p-2 text-foreground/50 hover:text-anime-pink transition-colors rounded-xl bg-foreground/5 border border-foreground/10"
     >
       {theme === "dark" ? (
         <Sun className="h-5 w-5" />
@@ -124,8 +124,8 @@ export default function Navbar() {
     <nav
       className={`fixed w-full z-50 transition-all duration-500 ${
         isScrolled
-          ? "bg-[#0a0014]/95 backdrop-blur-xl border-b border-[#ff6b9d]/20 shadow-[0_4px_30px_rgba(255,107,157,0.1)]"
-          : "bg-gradient-to-b from-[#0a0014]/90 to-transparent"
+          ? "bg-background/95 backdrop-blur-xl border-b border-anime-pink/20 shadow-[0_4px_30px_rgba(255,107,157,0.1)]"
+          : "bg-gradient-to-b from-background/90 to-transparent"
       }`}
     >
       <div className="max-w-[1800px] mx-auto px-4 md:px-12 py-4 flex items-center justify-between gap-8">
@@ -135,7 +135,7 @@ export default function Navbar() {
             href="/"
             className="text-2xl md:text-3xl font-bold tracking-tighter group relative"
           >
-            <span className="text-white group-hover:text-[#00f3ff] transition-colors duration-300">
+            <span className="text-foreground group-hover:text-[#00f3ff] transition-colors duration-300">
               ANI
             </span>
             <span className="text-[#00f3ff] group-hover:text-[#bc13fe] transition-colors duration-300">
@@ -157,7 +157,7 @@ export default function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="relative px-4 py-2 text-sm font-medium text-gray-300 hover:text-white transition-colors group"
+                className="relative px-4 py-2 text-sm font-medium text-foreground/60 hover:text-foreground transition-colors group"
               >
                 <span className="relative z-10">{link.label}</span>
                 <div className="absolute inset-0 bg-gradient-to-r from-[#ff6b9d]/20 to-[#c44eff]/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -181,15 +181,15 @@ export default function Navbar() {
                 onFocus={() =>
                   searchQuery.length >= 2 && setShowSuggestions(true)
                 }
-                className="relative bg-[#1a0a2e]/80 border border-white/10 rounded-full py-2.5 pl-11 pr-4 w-[220px] focus:w-[320px] transition-all duration-300 focus:outline-none focus:border-[#ff6b9d]/50 focus:bg-[#1a0a2e] text-sm text-white placeholder:text-gray-500"
+                className="relative bg-anime-dark/80 border border-foreground/10 rounded-full py-2.5 pl-11 pr-4 w-[220px] focus:w-[320px] transition-all duration-300 focus:outline-none focus:border-anime-pink/50 focus:bg-anime-dark text-sm text-foreground placeholder:text-foreground/40"
               />
             </form>
 
             {/* Search Suggestions */}
             {showSuggestions && suggestions.length > 0 && (
-              <div className="absolute top-full right-0 mt-3 w-[380px] bg-[#1a0a2e]/98 backdrop-blur-xl border border-[#ff6b9d]/30 rounded-2xl shadow-[0_20px_60px_rgba(255,107,157,0.2)] overflow-hidden">
+              <div className="absolute top-full right-0 mt-3 w-[380px] bg-anime-dark/98 backdrop-blur-xl border border-anime-pink/30 rounded-2xl shadow-[0_20px_60px_rgba(255,107,157,0.2)] overflow-hidden">
                 <div className="p-3">
-                  <div className="flex items-center gap-2 text-xs font-medium text-[#ff6b9d] px-2 pb-2 border-b border-white/10">
+                  <div className="flex items-center gap-2 text-xs font-medium text-anime-pink px-2 pb-2 border-b border-foreground/10">
                     <Sparkles className="h-3 w-3" />
                     <span>Search Results</span>
                   </div>
@@ -214,7 +214,7 @@ export default function Navbar() {
                           )}
                         </div>
                         <div className="flex-1 min-w-0">
-                          <div className="text-sm font-medium text-white group-hover:text-[#ff6b9d] truncate transition-colors">
+                          <div className="text-sm font-medium text-foreground group-hover:text-anime-pink truncate transition-colors">
                             {anime.title.userPreferred}
                           </div>
                           <div className="flex items-center gap-2 mt-1 text-xs text-gray-500">
@@ -246,19 +246,26 @@ export default function Navbar() {
               disabled={isSurprising}
               className="hidden lg:flex items-center gap-2 px-4 py-2 bg-[#ff6b9d]/10 hover:bg-[#ff6b9d]/20 border border-[#ff6b9d]/30 rounded-xl text-[#ff6b9d] text-sm font-bold transition-all group disabled:opacity-50"
             >
-              <Sparkles className={`h-4 w-4 ${isSurprising ? 'animate-spin' : 'group-hover:rotate-12'} transition-transform`} />
-              <span>{isSurprising ? 'Finding...' : 'Surprise Me'}</span>
+              <Sparkles
+                className={`h-4 w-4 ${
+                  isSurprising ? "animate-spin" : "group-hover:rotate-12"
+                } transition-transform`}
+              />
+              <span>{isSurprising ? "Finding..." : "Surprise Me"}</span>
             </button>
             <ThemeToggle />
             <button className="relative p-2 text-gray-400 hover:text-[#ff6b9d] transition-colors group">
               <Bell className="h-5 w-5" />
               <span className="absolute top-1 right-1 w-2 h-2 bg-[#ff6b9d] rounded-full" />
             </button>
-            <button className="relative overflow-hidden w-10 h-10 rounded-full bg-gradient-to-br from-[#ff6b9d] to-[#c44eff] p-[2px] hover:shadow-[0_0_20px_rgba(255,107,157,0.5)] transition-shadow">
-              <div className="w-full h-full rounded-full bg-[#1a0a2e] flex items-center justify-center">
-                <User className="h-4 w-4 text-white" />
+            <Link
+              href="/profile"
+              className="relative overflow-hidden w-10 h-10 rounded-full bg-gradient-to-br from-anime-pink to-anime-purple p-[2px] hover:shadow-[0_0_20px_rgba(255,107,157,0.5)] transition-shadow"
+            >
+              <div className="w-full h-full rounded-full bg-anime-dark flex items-center justify-center">
+                <User className="h-4 w-4 text-foreground" />
               </div>
-            </button>
+            </Link>
           </div>
 
           {/* Mobile Menu Toggle */}
@@ -277,15 +284,15 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="md:hidden bg-black/95 backdrop-blur-xl border-t border-[#00f3ff]/20 p-4 absolute w-full">
+        <div className="md:hidden bg-background/95 backdrop-blur-xl border-t border-anime-blue/20 p-4 absolute w-full">
           <form onSubmit={handleSearchSubmit} className="mb-6 relative">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-foreground/40" />
             <input
               type="text"
               placeholder="Search for anime..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-white/5 border border-white/10 rounded-full py-2 pl-10 pr-4 text-sm text-white focus:outline-none focus:border-[#00f3ff]/50"
+              className="w-full bg-foreground/5 border border-foreground/10 rounded-full py-2 pl-10 pr-4 text-sm text-foreground focus:outline-none focus:border-anime-blue/50"
             />
           </form>
           <div className="flex flex-col gap-4 font-mono text-sm">
@@ -300,7 +307,7 @@ export default function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-gray-300 hover:text-[#00f3ff] uppercase tracking-widest"
+                className="text-foreground/60 hover:text-anime-blue uppercase tracking-widest"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 {link.label}
@@ -314,26 +321,28 @@ export default function Navbar() {
               disabled={isSurprising}
               className="flex items-center gap-2 text-[#ff6b9d] uppercase tracking-widest font-bold disabled:opacity-50"
             >
-              <Sparkles className={`h-4 w-4 ${isSurprising ? 'animate-spin' : ''}`} />
-              <span>{isSurprising ? 'Finding...' : 'Surprise Me'}</span>
+              <Sparkles
+                className={`h-4 w-4 ${isSurprising ? "animate-spin" : ""}`}
+              />
+              <span>{isSurprising ? "Finding..." : "Surprise Me"}</span>
             </button>
             <Link
               href="/trending"
-              className="text-gray-300 hover:text-[#00f3ff] uppercase tracking-widest"
+              className="text-foreground/60 hover:text-anime-blue uppercase tracking-widest"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               Trending
             </Link>
             <Link
               href="/popular"
-              className="text-gray-300 hover:text-[#00f3ff] uppercase tracking-widest"
+              className="text-foreground/60 hover:text-anime-blue uppercase tracking-widest"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               Popular
             </Link>
             <Link
               href="/upcoming"
-              className="text-gray-300 hover:text-[#00f3ff] uppercase tracking-widest"
+              className="text-foreground/60 hover:text-anime-blue uppercase tracking-widest"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               Upcoming

@@ -74,6 +74,8 @@ export const TRENDING_ANIME_QUERY = `
         genres
         format
         episodes
+        status
+        seasonYear
       }
     }
   }
@@ -97,6 +99,8 @@ export const POPULAR_ANIME_QUERY = `
         genres
         format
         episodes
+        status
+        seasonYear
       }
     }
   }
@@ -152,6 +156,8 @@ export const UPCOMING_ANIME_QUERY = `
         genres
         format
         episodes
+        status
+        seasonYear
       }
     }
   }

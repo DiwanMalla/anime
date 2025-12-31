@@ -27,9 +27,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en" suppressHydrationWarning>
       <body
-        className={`${inter.className} antialiased bg-white dark:bg-[#141414] text-black dark:text-white transition-colors duration-300`}
+        className={`${inter.className} antialiased transition-colors duration-300`}
       >
         <Providers>
           <Navbar />

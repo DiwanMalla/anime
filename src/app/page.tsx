@@ -41,7 +41,7 @@ export default async function Home() {
   const heroAnime = trending[0];
 
   return (
-    <main className="min-h-screen bg-[#0a0014] text-white pb-20">
+    <main className="min-h-screen bg-background text-foreground pb-20">
       {/* Hero Section */}
       {heroAnime && (
         <div className="relative h-[85vh] w-full overflow-hidden">
@@ -56,7 +56,7 @@ export default async function Home() {
           </div>
 
           <div className="absolute bottom-[20%] left-4 md:left-12 max-w-2xl z-10 w-full pr-4">
-            <h1 className="text-2xl sm:text-4xl md:text-6xl font-bold mb-4 drop-shadow-lg leading-tight">
+            <h1 className="text-2xl sm:text-4xl md:text-6xl font-bold mb-4 drop-shadow-lg leading-tight text-white">
               {heroAnime.title?.english || heroAnime.title?.romaji}
             </h1>
             <p className="text-sm sm:text-lg text-gray-200 mb-6 line-clamp-3 drop-shadow-md max-w-xl">
@@ -101,7 +101,7 @@ function AnimeRow({ title, items }: { title: string; items: any[] }) {
 
   return (
     <section>
-      <h2 className="text-lg md:text-2xl font-semibold mb-4 text-gray-100 hover:text-white cursor-pointer flex items-center gap-2 group">
+      <h2 className="text-lg md:text-2xl font-semibold mb-4 text-foreground cursor-pointer flex items-center gap-2 group">
         {title}
         <span className="text-xs md:text-sm text-[#00f3ff] opacity-0 group-hover:opacity-100 transition-opacity flex items-center">
           Explore All <ChevronRight className="h-4 w-4" />
@@ -125,7 +125,7 @@ function MangaRow({ title, items }: { title: string; items: any[] }) {
 
   return (
     <section>
-      <h2 className="text-lg md:text-2xl font-semibold mb-4 text-gray-100 hover:text-white cursor-pointer flex items-center gap-2 group">
+      <h2 className="text-lg md:text-2xl font-semibold mb-4 text-foreground cursor-pointer flex items-center gap-2 group">
         {title}
         <span className="text-xs md:text-sm text-[#00f3ff] opacity-0 group-hover:opacity-100 transition-opacity flex items-center">
           Explore All <ChevronRight className="h-4 w-4" />

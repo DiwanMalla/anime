@@ -51,7 +51,7 @@ export default function SeasonalPage() {
   }, [inView, hasNextPage, loading, loadingMore]);
 
   return (
-    <main className="min-h-screen bg-[#141414] text-white pt-24 pb-20 px-4 md:px-12">
+    <main className="min-h-screen bg-background text-foreground pt-24 pb-20 px-4 md:px-12">
       <div className="max-w-[1920px] mx-auto">
         <div className="flex items-center gap-3 mb-12">
           <div className="p-3 rounded-2xl bg-purple-500/10 border border-purple-500/20">

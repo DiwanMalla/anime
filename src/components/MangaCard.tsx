@@ -64,7 +64,7 @@ export default function MangaCard({ manga }: MangaCardProps) {
           }}
         />
 
-        <div className="relative bg-[#1a0a2e]/80 backdrop-blur-md rounded-2xl overflow-hidden border border-white/10 hover:border-white/20 transition-all duration-500 shadow-2xl">
+        <div className="relative bg-anime-dark/80 backdrop-blur-md rounded-2xl overflow-hidden border border-foreground/10 hover:border-foreground/20 transition-all duration-500 shadow-2xl">
           <div className="relative aspect-[2/3] w-full overflow-hidden">
             <img
               src={manga.coverImage.large}
@@ -118,7 +118,7 @@ export default function MangaCard({ manga }: MangaCardProps) {
           </div>
 
           <div className="p-4 space-y-3">
-            <h3 className="text-white font-bold text-sm md:text-base line-clamp-2 hover:text-purple-400 transition-colors duration-300 min-h-[2.5rem]">
+            <h3 className="text-foreground font-bold text-sm md:text-base line-clamp-2 hover:text-purple-400 transition-colors duration-300 min-h-[2.5rem]">
               {title}
             </h3>
 
@@ -126,15 +126,15 @@ export default function MangaCard({ manga }: MangaCardProps) {
               {manga.genres?.slice(0, 2).map((genre) => (
                 <span
                   key={genre}
-                  className="text-[10px] font-medium px-2 py-0.5 rounded-md bg-white/5 text-gray-400 border border-white/5"
+                  className="text-[10px] font-medium px-2 py-0.5 rounded-md bg-foreground/5 text-foreground/60 border border-foreground/5"
                 >
                   {genre}
                 </span>
               ))}
             </div>
 
-            <div className="flex items-center justify-between pt-2 border-t border-white/5">
-              <div className="flex items-center gap-1.5 text-gray-500">
+            <div className="flex items-center justify-between pt-2 border-t border-foreground/5">
+              <div className="flex items-center gap-1.5 text-foreground/50">
                 <BookOpen className="h-3 w-3" />
                 <span className="text-[10px] font-medium">
                   {manga.chapters || "?"} CH

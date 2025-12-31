@@ -20,6 +20,7 @@ import AnimeCard from "@/components/AnimeCard";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import WatchlistButton from "@/components/WatchlistButton";
+import CommunityLayer from "@/components/CommunityLayer";
 
 interface PageProps {
   params: Promise<{ id: string }>;
@@ -65,7 +66,7 @@ export default async function AnimeDetailsPage({ params }: PageProps) {
   const endDate = anime.endDate ? formatDate(anime.endDate) : "Ongoing";
 
   return (
-    <main className="min-h-screen bg-[#050505] text-gray-100 pb-20 font-sans selection:bg-[#00f3ff] selection:text-black">
+    <main className="min-h-screen bg-background text-foreground pb-20 font-sans selection:bg-[#00f3ff] selection:text-black">
       {/* Banner */}
       <div className="relative h-[50vh] md:h-[60vh] w-full overflow-hidden">
         <div className="absolute top-20 md:top-24 left-4 z-20">
@@ -86,9 +87,9 @@ export default async function AnimeDetailsPage({ params }: PageProps) {
             className="w-full h-full object-cover opacity-60"
           />
         ) : (
-          <div className="w-full h-full bg-[#0a0a0a]" />
+          <div className="w-full h-full bg-background" />
         )}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/60 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
         <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-20" />
       </div>
 
@@ -107,62 +108,68 @@ export default async function AnimeDetailsPage({ params }: PageProps) {
 
             <WatchlistButton anime={anime} className="w-full py-4 text-lg" />
 
-            <div className="sci-fi-border p-6 rounded-sm space-y-6">
-              <h3 className="font-mono text-[#00f3ff] text-lg border-b border-[#00f3ff]/20 pb-2 uppercase tracking-widest flex items-center gap-2">
+            <div className="anime-panel p-6 rounded-sm space-y-6">
+              <h3 className="font-mono text-anime-blue text-lg border-b border-anime-blue/20 pb-2 uppercase tracking-widest flex items-center gap-2">
                 <Info className="h-4 w-4" /> Data Log
               </h3>
               <div className="space-y-4 text-sm font-mono">
-                <div className="flex justify-between items-center border-b border-white/5 pb-2">
-                  <span className="text-gray-500 uppercase">Format</span>
-                  <span className="text-white">{anime.format || "TV"}</span>
+                <div className="flex justify-between items-center border-b border-foreground/5 pb-2">
+                  <span className="text-foreground/50 uppercase">Format</span>
+                  <span className="text-foreground">
+                    {anime.format || "TV"}
+                  </span>
                 </div>
-                <div className="flex justify-between items-center border-b border-white/5 pb-2">
-                  <span className="text-gray-500 uppercase">Episodes</span>
-                  <span className="text-white">{anime.episodes || "?"}</span>
+                <div className="flex justify-between items-center border-b border-foreground/5 pb-2">
+                  <span className="text-foreground/50 uppercase">Episodes</span>
+                  <span className="text-foreground">
+                    {anime.episodes || "?"}
+                  </span>
                 </div>
-                <div className="flex justify-between items-center border-b border-white/5 pb-2">
-                  <span className="text-gray-500 uppercase">Duration</span>
-                  <span className="text-white">
+                <div className="flex justify-between items-center border-b border-foreground/5 pb-2">
+                  <span className="text-foreground/50 uppercase">Duration</span>
+                  <span className="text-foreground">
                     {anime.duration ? `${anime.duration} min` : "?"}
                   </span>
                 </div>
-                <div className="flex justify-between items-center border-b border-white/5 pb-2">
-                  <span className="text-gray-500 uppercase">Status</span>
+                <div className="flex justify-between items-center border-b border-foreground/5 pb-2">
+                  <span className="text-foreground/50 uppercase">Status</span>
                   <span
                     className={`uppercase ${
                       anime.status === "RELEASING"
-                        ? "text-[#00f3ff] animate-pulse"
-                        : "text-white"
+                        ? "text-anime-blue animate-pulse"
+                        : "text-foreground"
                     }`}
                   >
                     {anime.status}
                   </span>
                 </div>
-                <div className="flex justify-between items-center border-b border-white/5 pb-2">
-                  <span className="text-gray-500 uppercase">Start Date</span>
-                  <span className="text-white">{startDate}</span>
+                <div className="flex justify-between items-center border-b border-foreground/5 pb-2">
+                  <span className="text-foreground/50 uppercase">
+                    Start Date
+                  </span>
+                  <span className="text-foreground">{startDate}</span>
                 </div>
-                <div className="flex justify-between items-center border-b border-white/5 pb-2">
-                  <span className="text-gray-500 uppercase">End Date</span>
-                  <span className="text-white">{endDate}</span>
+                <div className="flex justify-between items-center border-b border-foreground/5 pb-2">
+                  <span className="text-foreground/50 uppercase">End Date</span>
+                  <span className="text-foreground">{endDate}</span>
                 </div>
-                <div className="flex justify-between items-center border-b border-white/5 pb-2">
-                  <span className="text-gray-500 uppercase">Season</span>
-                  <span className="text-white capitalize">
+                <div className="flex justify-between items-center border-b border-foreground/5 pb-2">
+                  <span className="text-foreground/50 uppercase">Season</span>
+                  <span className="text-foreground capitalize">
                     {anime.season
                       ? `${anime.season.toLowerCase()} ${anime.seasonYear}`
                       : "?"}
                   </span>
                 </div>
-                <div className="flex justify-between items-center border-b border-white/5 pb-2">
-                  <span className="text-gray-500 uppercase">Source</span>
-                  <span className="text-white capitalize">
+                <div className="flex justify-between items-center border-b border-foreground/5 pb-2">
+                  <span className="text-foreground/50 uppercase">Source</span>
+                  <span className="text-foreground capitalize">
                     {anime.source?.replace(/_/g, " ").toLowerCase() || "?"}
                   </span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-gray-500 uppercase">Studio</span>
-                  <span className="text-[#bc13fe]">
+                  <span className="text-foreground/50 uppercase">Studio</span>
+                  <span className="text-anime-purple">
                     {anime.studios?.nodes[0]?.name || "?"}
                   </span>
                 </div>
@@ -171,8 +178,8 @@ export default async function AnimeDetailsPage({ params }: PageProps) {
 
             {/* Streaming Links */}
             {anime.externalLinks?.length > 0 && (
-              <div className="sci-fi-border p-6 rounded-sm space-y-4">
-                <h3 className="font-mono text-[#00f3ff] text-lg border-b border-[#00f3ff]/20 pb-2 uppercase tracking-widest flex items-center gap-2">
+              <div className="anime-panel p-6 rounded-sm space-y-4">
+                <h3 className="font-mono text-anime-blue text-lg border-b border-anime-blue/20 pb-2 uppercase tracking-widest flex items-center gap-2">
                   <MonitorPlay className="h-4 w-4" /> Stream Source
                 </h3>
                 <div className="flex flex-col gap-3">
@@ -182,7 +189,7 @@ export default async function AnimeDetailsPage({ params }: PageProps) {
                       href={link.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center justify-between gap-3 text-sm text-white hover:text-[#00f3ff] transition group bg-[#0a0a0a] p-4 rounded border border-white/10 hover:border-[#00f3ff]/50 hover:bg-[#00f3ff]/5"
+                      className="flex items-center justify-between gap-3 text-sm text-foreground hover:text-anime-blue transition group bg-anime-dark/50 p-4 rounded border border-foreground/10 hover:border-anime-blue/50 hover:bg-anime-blue/5"
                     >
                       <div className="flex items-center gap-3">
                         {link.icon && (
@@ -203,8 +210,8 @@ export default async function AnimeDetailsPage({ params }: PageProps) {
 
             {/* Synonyms */}
             {anime.synonyms?.length > 0 && (
-              <div className="sci-fi-border p-6 rounded-sm space-y-4">
-                <h3 className="font-mono text-[#00f3ff] text-lg border-b border-[#00f3ff]/20 pb-2 uppercase tracking-widest flex items-center gap-2">
+              <div className="anime-panel p-6 rounded-sm space-y-4">
+                <h3 className="font-mono text-anime-blue text-lg border-b border-anime-blue/20 pb-2 uppercase tracking-widest flex items-center gap-2">
                   <Hash className="h-4 w-4" /> Aliases
                 </h3>
                 <div className="flex flex-col gap-2">
@@ -222,24 +229,24 @@ export default async function AnimeDetailsPage({ params }: PageProps) {
 
             {/* Status Distribution */}
             {anime.stats?.statusDistribution && (
-              <div className="sci-fi-border p-6 rounded-sm space-y-4">
-                <h3 className="font-mono text-[#00f3ff] text-lg border-b border-[#00f3ff]/20 pb-2 uppercase tracking-widest flex items-center gap-2">
+              <div className="anime-panel p-6 rounded-sm space-y-4">
+                <h3 className="font-mono text-anime-blue text-lg border-b border-anime-blue/20 pb-2 uppercase tracking-widest flex items-center gap-2">
                   <BarChart3 className="h-4 w-4" /> User Stats
                 </h3>
                 <div className="space-y-3">
                   {anime.stats.statusDistribution.map((stat: any) => (
                     <div key={stat.status} className="space-y-1">
                       <div className="flex justify-between text-[10px] font-mono uppercase">
-                        <span className="text-gray-400">
+                        <span className="text-foreground/40">
                           {stat.status.replace(/_/g, " ")}
                         </span>
-                        <span className="text-white">
+                        <span className="text-foreground">
                           {stat.amount.toLocaleString()}
                         </span>
                       </div>
-                      <div className="h-1 w-full bg-white/5 rounded-full overflow-hidden">
+                      <div className="h-1 w-full bg-foreground/5 rounded-full overflow-hidden">
                         <div
-                          className="h-full bg-gradient-to-r from-[#00f3ff] to-[#bc13fe]"
+                          className="h-full bg-gradient-to-r from-anime-blue to-anime-purple"
                           style={{
                             width: `${(stat.amount / anime.popularity) * 100}%`,
                           }}
@@ -252,8 +259,8 @@ export default async function AnimeDetailsPage({ params }: PageProps) {
             )}
             {/* External Links */}
             {anime.externalLinks?.length > 0 && (
-              <div className="sci-fi-border p-6 rounded-sm space-y-4">
-                <h3 className="font-mono text-[#00f3ff] text-lg border-b border-[#00f3ff]/20 pb-2 uppercase tracking-widest flex items-center gap-2">
+              <div className="anime-panel p-6 rounded-sm space-y-4">
+                <h3 className="font-mono text-anime-blue text-lg border-b border-anime-blue/20 pb-2 uppercase tracking-widest flex items-center gap-2">
                   <ExternalLink className="h-4 w-4" /> External Links
                 </h3>
                 <div className="flex flex-wrap gap-2">
@@ -263,7 +270,7 @@ export default async function AnimeDetailsPage({ params }: PageProps) {
                       href={link.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-2 px-3 py-1.5 bg-white/5 border border-white/10 rounded hover:bg-white/10 hover:border-[#00f3ff]/50 transition-all text-xs font-mono"
+                      className="flex items-center gap-2 px-3 py-1.5 bg-foreground/5 border border-foreground/10 rounded hover:bg-foreground/10 hover:border-anime-blue/50 transition-all text-xs font-mono"
                       style={{ color: link.color || "inherit" }}
                     >
                       {link.icon && (
@@ -279,7 +286,7 @@ export default async function AnimeDetailsPage({ params }: PageProps) {
 
           {/* Right Column: Content */}
           <div className="flex-1 pt-4">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold mb-2 text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-500 drop-shadow-[0_0_10px_rgba(255,255,255,0.3)] leading-tight">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold mb-2 text-foreground leading-tight">
               {title}
             </h1>
             {anime.title.native && (
@@ -308,13 +315,13 @@ export default async function AnimeDetailsPage({ params }: PageProps) {
             </div>
 
             {anime.nextAiringEpisode && (
-              <div className="mb-8 p-4 bg-[#00f3ff]/5 border border-[#00f3ff]/30 rounded-lg flex items-center gap-4 animate-pulse">
-                <Clock className="h-6 w-6 text-[#00f3ff]" />
+              <div className="mb-8 p-4 bg-anime-blue/5 border border-anime-blue/30 rounded-lg flex items-center gap-4 animate-pulse">
+                <Clock className="h-6 w-6 text-anime-blue" />
                 <div>
-                  <div className="text-[#00f3ff] font-mono text-sm uppercase tracking-widest">
+                  <div className="text-anime-blue font-mono text-sm uppercase tracking-widest">
                     Next Transmission
                   </div>
-                  <div className="text-white font-bold">
+                  <div className="text-foreground font-bold">
                     Episode {anime.nextAiringEpisode.episode} airing in{" "}
                     {Math.ceil(anime.nextAiringEpisode.timeUntilAiring / 86400)}{" "}
                     days
@@ -346,12 +353,12 @@ export default async function AnimeDetailsPage({ params }: PageProps) {
             </div>
 
             <div className="mb-12 relative">
-              <div className="absolute -left-4 top-0 bottom-0 w-1 bg-gradient-to-b from-[#00f3ff] to-transparent opacity-50" />
-              <h3 className="text-xl font-mono text-gray-400 mb-4 uppercase tracking-widest">
+              <div className="absolute -left-4 top-0 bottom-0 w-1 bg-gradient-to-b from-anime-blue to-transparent opacity-50" />
+              <h3 className="text-xl font-mono text-foreground/40 mb-4 uppercase tracking-widest">
                 Synopsis
               </h3>
               <div
-                className="text-gray-300 leading-relaxed max-w-4xl text-lg font-light"
+                className="text-foreground/80 leading-relaxed max-w-4xl text-lg font-light"
                 dangerouslySetInnerHTML={{ __html: anime.description }}
               />
             </div>
@@ -359,7 +366,7 @@ export default async function AnimeDetailsPage({ params }: PageProps) {
             {/* Relations Section */}
             {anime.relations?.edges?.length > 0 && (
               <div className="mb-12">
-                <h3 className="text-xl font-mono text-[#00f3ff] mb-6 flex items-center gap-2 uppercase tracking-widest">
+                <h3 className="text-xl font-mono text-anime-blue mb-6 flex items-center gap-2 uppercase tracking-widest">
                   <Layers className="h-5 w-5" /> Related Seasons & Spin-offs
                 </h3>
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
@@ -367,7 +374,7 @@ export default async function AnimeDetailsPage({ params }: PageProps) {
                     <Link
                       key={edge.node.id}
                       href={`/anime/${edge.node.id}`}
-                      className="group relative aspect-[2/3] rounded overflow-hidden border border-white/10 hover:border-[#00f3ff]/50 transition-all"
+                      className="group relative aspect-[2/3] rounded overflow-hidden border border-foreground/10 hover:border-anime-blue/50 transition-all"
                     >
                       <img
                         src={edge.node.coverImage.large}
@@ -376,13 +383,13 @@ export default async function AnimeDetailsPage({ params }: PageProps) {
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-80" />
                       <div className="absolute bottom-0 left-0 p-2 w-full">
-                        <div className="text-[10px] font-mono text-[#00f3ff] uppercase tracking-tighter mb-1">
+                        <div className="text-[10px] font-mono text-anime-blue uppercase tracking-tighter mb-1">
                           {edge.relationType.replace(/_/g, " ")}
                         </div>
                         <div className="text-xs font-bold text-white truncate">
                           {edge.node.title.userPreferred}
                         </div>
-                        <div className="text-[10px] text-gray-400 uppercase">
+                        <div className="text-[10px] text-gray-300 uppercase">
                           {edge.node.format} • {edge.node.status}
                         </div>
                       </div>
@@ -395,7 +402,7 @@ export default async function AnimeDetailsPage({ params }: PageProps) {
             {/* Episode List */}
             {anime.streamingEpisodes?.length > 0 && (
               <div className="mb-12">
-                <h3 className="text-xl font-mono text-[#bc13fe] mb-6 flex items-center gap-2 uppercase tracking-widest">
+                <h3 className="text-xl font-mono text-anime-purple mb-6 flex items-center gap-2 uppercase tracking-widest">
                   <PlayCircle className="h-5 w-5" /> Episodes
                 </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-4xl">
@@ -405,7 +412,7 @@ export default async function AnimeDetailsPage({ params }: PageProps) {
                       href={ep.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex gap-4 bg-[#0a0a0a] border border-gray-800 p-2 rounded hover:border-[#bc13fe]/50 transition-all group"
+                      className="flex gap-4 bg-anime-dark/50 border border-foreground/10 p-2 rounded hover:border-anime-purple/50 transition-all group"
                     >
                       <div className="relative w-32 h-20 flex-shrink-0 overflow-hidden rounded">
                         <img
@@ -418,10 +425,10 @@ export default async function AnimeDetailsPage({ params }: PageProps) {
                         </div>
                       </div>
                       <div className="flex flex-col justify-center min-w-0">
-                        <div className="text-sm font-bold text-white truncate group-hover:text-[#bc13fe] transition-colors">
+                        <div className="text-sm font-bold text-foreground truncate group-hover:text-anime-purple transition-colors">
                           {ep.title}
                         </div>
-                        <div className="text-xs text-gray-500 font-mono uppercase mt-1">
+                        <div className="text-xs text-foreground/50 font-mono uppercase mt-1">
                           {ep.site}
                         </div>
                       </div>
@@ -453,14 +460,14 @@ export default async function AnimeDetailsPage({ params }: PageProps) {
             {/* Characters Section */}
             {anime.characters?.edges?.length > 0 && (
               <div className="mb-12">
-                <h3 className="text-xl font-mono text-[#bc13fe] mb-6 flex items-center gap-2 uppercase tracking-widest">
+                <h3 className="text-xl font-mono text-anime-purple mb-6 flex items-center gap-2 uppercase tracking-widest">
                   <Users className="h-5 w-5" /> Characters
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-[1400px]">
                   {anime.characters.edges.map((char: any) => (
                     <div
                       key={char.node.id}
-                      className="flex justify-between bg-[#0a0a0a] border border-gray-800 rounded hover:border-[#bc13fe]/50 transition-colors p-2 h-24"
+                      className="flex justify-between bg-anime-dark/50 border border-foreground/10 rounded hover:border-anime-purple/50 transition-colors p-2 h-24"
                     >
                       {/* Character (Left) */}
                       <Link
@@ -473,10 +480,10 @@ export default async function AnimeDetailsPage({ params }: PageProps) {
                           className="w-14 h-full object-cover rounded group-hover/char:opacity-80 transition-opacity"
                         />
                         <div className="flex flex-col justify-center">
-                          <div className="text-sm font-bold text-white line-clamp-2 leading-tight group-hover/char:text-[#bc13fe] transition-colors">
+                          <div className="text-sm font-bold text-foreground line-clamp-2 leading-tight group-hover/char:text-anime-purple transition-colors">
                             {char.node.name.full}
                           </div>
-                          <div className="text-xs text-gray-500 font-mono uppercase mt-1">
+                          <div className="text-xs text-foreground/50 font-mono uppercase mt-1">
                             {char.role}
                           </div>
                         </div>
@@ -489,10 +496,10 @@ export default async function AnimeDetailsPage({ params }: PageProps) {
                           className="flex gap-3 h-full text-right group/staff"
                         >
                           <div className="flex flex-col justify-center items-end">
-                            <div className="text-sm font-bold text-white line-clamp-2 leading-tight group-hover/staff:text-[#bc13fe] transition-colors">
+                            <div className="text-sm font-bold text-foreground line-clamp-2 leading-tight group-hover/staff:text-anime-purple transition-colors">
                               {char.voiceActors[0].name.full}
                             </div>
-                            <div className="text-xs text-gray-500 font-mono uppercase mt-1">
+                            <div className="text-xs text-foreground/50 font-mono uppercase mt-1">
                               Japanese
                             </div>
                           </div>
@@ -515,7 +522,7 @@ export default async function AnimeDetailsPage({ params }: PageProps) {
             {/* Staff Section */}
             {anime.staff?.edges?.length > 0 && (
               <div className="mb-12">
-                <h3 className="text-xl font-mono text-white mb-6 flex items-center gap-2 uppercase tracking-widest">
+                <h3 className="text-xl font-mono text-foreground mb-6 flex items-center gap-2 uppercase tracking-widest">
                   <Users className="h-5 w-5" /> Core System Architects
                 </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-[1400px]">
@@ -523,7 +530,7 @@ export default async function AnimeDetailsPage({ params }: PageProps) {
                     <Link
                       key={`${staff.node.id}-${staff.role}-${index}`}
                       href={`/staff/${staff.node.id}`}
-                      className="flex items-center gap-4 bg-[#0a0a0a] border border-gray-800 p-3 rounded hover:border-[#bc13fe]/30 transition-colors h-24 group"
+                      className="flex items-center gap-4 bg-anime-dark/50 border border-foreground/10 p-3 rounded hover:border-anime-purple/30 transition-colors h-24 group"
                     >
                       <img
                         src={staff.node.image.large || staff.node.image.medium}
@@ -531,15 +538,15 @@ export default async function AnimeDetailsPage({ params }: PageProps) {
                         className="w-16 h-full object-cover rounded group-hover:opacity-80 transition-opacity"
                       />
                       <div className="flex flex-col justify-center min-w-0">
-                        <div className="text-sm font-bold text-white truncate group-hover:text-[#bc13fe] transition-colors">
+                        <div className="text-sm font-bold text-foreground truncate group-hover:text-anime-purple transition-colors">
                           {staff.node.name.full}
                         </div>
                         {staff.node.name.native && (
-                          <div className="text-xs text-gray-400 font-mono truncate">
+                          <div className="text-xs text-foreground/40 font-mono truncate">
                             {staff.node.name.native}
                           </div>
                         )}
-                        <div className="text-[10px] text-[#bc13fe] font-mono uppercase mt-1 truncate">
+                        <div className="text-[10px] text-anime-purple font-mono uppercase mt-1 truncate">
                           {staff.role}
                         </div>
                       </div>
@@ -549,10 +556,13 @@ export default async function AnimeDetailsPage({ params }: PageProps) {
               </div>
             )}
 
+            {/* Community Section */}
+            <CommunityLayer mediaId={anime.id} mediaTitle={title} />
+
             {/* Recommendations */}
             {anime.recommendations?.nodes?.length > 0 && (
               <div>
-                <h3 className="text-2xl font-mono text-white mb-8 uppercase tracking-widest border-l-4 border-[#00f3ff] pl-4">
+                <h3 className="text-2xl font-mono text-foreground mb-8 uppercase tracking-widest border-l-4 border-anime-blue pl-4">
                   Recommendations
                 </h3>
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">

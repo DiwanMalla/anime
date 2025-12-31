@@ -46,14 +46,15 @@ export default function GenresPage() {
   }, []);
 
   return (
-    <main className="min-h-screen bg-[#0a0014] text-white pt-24 pb-20 px-4 md:px-12">
+    <main className="min-h-screen bg-background text-foreground pt-24 pb-20 px-4 md:px-12">
       <div className="max-w-[1800px] mx-auto">
         <div className="mb-12">
           <h1 className="text-3xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-[#bc13fe] to-[#00f3ff] bg-clip-text text-transparent">
             Genre Explorer
           </h1>
-          <p className="text-gray-400 font-mono text-sm max-w-xl">
-            Dive into specific categories. From adrenaline-pumping action to heartwarming romance.
+          <p className="text-foreground/50 font-mono text-sm max-w-xl">
+            Dive into specific categories. From adrenaline-pumping action to
+            heartwarming romance.
           </p>
         </div>
 
@@ -64,25 +65,29 @@ export default function GenresPage() {
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {genres.map((genre, index) => {
-              const gradient = GENRE_GRADIENTS[genre.replace(/ /g, "_")] || "from-gray-800 to-gray-900";
-              
+              const gradient =
+                GENRE_GRADIENTS[genre.replace(/ /g, "_")] ||
+                "from-gray-800 to-gray-900";
+
               return (
                 <Link
                   key={genre}
                   href={`/search?genre=${genre}`}
-                  className="group relative h-32 rounded-xl overflow-hidden border border-white/10 hover:border-white/30 transition-all hover:scale-[1.02]"
+                  className="group relative h-32 rounded-xl overflow-hidden border border-foreground/10 hover:border-foreground/30 transition-all hover:scale-[1.02]"
                 >
-                  <div className={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-60 group-hover:opacity-80 transition-opacity`} />
+                  <div
+                    className={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-60 group-hover:opacity-80 transition-opacity`}
+                  />
                   <div className="absolute inset-0 bg-[url('/noise.png')] opacity-20" />
-                  
+
                   <div className="absolute inset-0 p-6 flex items-center justify-between">
                     <div>
-                      <div className="text-2xl font-bold uppercase tracking-wider drop-shadow-lg">
+                      <div className="text-2xl font-bold uppercase tracking-wider drop-shadow-lg text-white">
                         {genre}
                       </div>
                       <div className="h-1 w-8 bg-white/50 rounded-full mt-2 group-hover:w-16 transition-all" />
                     </div>
-                    <ArrowRight className="h-6 w-6 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
+                    <ArrowRight className="h-6 w-6 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 text-white" />
                   </div>
                 </Link>
               );

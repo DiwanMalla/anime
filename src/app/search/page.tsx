@@ -2,26 +2,12 @@
 
 import { useState, useEffect, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
-import { fetchAniList, SEARCH_ANIME_QUERY } from "@/lib/anilist";
+import { fetchAniList, SEARCH_ANIME_QUERY, GENRES_QUERY } from "@/lib/anilist";
 import AnimeCard from "@/components/AnimeCard";
 import { Loader2, Filter, X, ChevronDown } from "lucide-react";
 import { useInView } from "react-intersection-observer";
 
-const GENRES = [
-  "Action",
-  "Adventure",
-  "Comedy",
-  "Drama",
-  "Fantasy",
-  "Horror",
-  "Mystery",
-  "Psychological",
-  "Romance",
-  "Sci-Fi",
-  "Slice of Life",
-  "Supernatural",
-  "Thriller",
-];
+// Genres and Tags are now fetched dynamically from API
 
 const STATUSES = [
   { label: "Airing", value: "RELEASING" },
@@ -64,6 +50,23 @@ function SearchResults() {
   const [page, setPage] = useState(1);
   const [hasNextPage, setHasNextPage] = useState(true);
   const [showFilters, setShowFilters] = useState(false);
+  const [genresList, setGenresList] = useState<string[]>([]);
+  const [tagsList, setTagsList] = useState<any[]>([]);
+
+  useEffect(() => {
+    fetchAniList(GENRES_QUERY).then((data) => {
+      if (data?.GenreCollection) {
+        setGenresList(data.GenreCollection);
+      }
+      if (data?.MediaTagCollection) {
+        setTagsList(
+          data.MediaTagCollection.filter((t: any) => !t.isAdult).sort(
+            (a: any, b: any) => a.name.localeCompare(b.name)
+          )
+        );
+      }
+    });
+  }, []);
 
   const { ref, inView } = useInView({
     threshold: 0,
@@ -135,13 +138,13 @@ function SearchResults() {
   return (
     <div className="max-w-[1920px] mx-auto px-4 md:px-12 py-24">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
-        <h1 className="text-2xl md:text-3xl font-bold text-white">
+        <h1 className="text-2xl md:text-3xl font-bold text-foreground">
           {query ? `Results for "${query}"` : "Browse Anime"}
         </h1>
 
         <button
           onClick={() => setShowFilters(!showFilters)}
-          className="flex items-center gap-2 bg-white/5 hover:bg-white/10 border border-white/10 px-4 py-2 rounded-xl transition-all md:hidden"
+          className="flex items-center gap-2 bg-foreground/5 hover:bg-foreground/10 border border-foreground/10 px-4 py-2 rounded-xl transition-all md:hidden"
         >
           <Filter className="h-4 w-4" />
           Filters
@@ -150,24 +153,47 @@ function SearchResults() {
 
       {/* Filters Bar */}
       <div
-        className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-12 ${
+        className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4 mb-12 ${
           showFilters ? "block" : "hidden md:grid"
         }`}
       >
         {/* Genre Filter */}
         <div className="space-y-2">
-          <label className="text-xs font-bold text-gray-500 uppercase tracking-wider">
+          <label className="text-xs font-bold text-foreground/50 uppercase tracking-wider">
             Genre
           </label>
           <select
             value={genre}
             onChange={(e) => updateFilters("genre", e.target.value)}
-            className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-blue-500/50 appearance-none cursor-pointer"
+            className="w-full bg-foreground/5 border border-foreground/10 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-blue-500/50 appearance-none cursor-pointer text-foreground"
           >
-            <option value="">All Genres</option>
-            {GENRES.map((g) => (
-              <option key={g} value={g}>
+            <option value="" className="bg-background">
+              All Genres
+            </option>
+            {genresList.map((g) => (
+              <option key={g} value={g} className="bg-background">
                 {g}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        {/* Tag Filter */}
+        <div className="space-y-2">
+          <label className="text-xs font-bold text-foreground/50 uppercase tracking-wider">
+            Tag
+          </label>
+          <select
+            value={tag}
+            onChange={(e) => updateFilters("tag", e.target.value)}
+            className="w-full bg-foreground/5 border border-foreground/10 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-blue-500/50 appearance-none cursor-pointer text-foreground"
+          >
+            <option value="" className="bg-background">
+              All Tags
+            </option>
+            {tagsList.map((t) => (
+              <option key={t.name} value={t.name} className="bg-background">
+                {t.name}
               </option>
             ))}
           </select>
@@ -175,17 +201,19 @@ function SearchResults() {
 
         {/* Status Filter */}
         <div className="space-y-2">
-          <label className="text-xs font-bold text-gray-500 uppercase tracking-wider">
+          <label className="text-xs font-bold text-foreground/50 uppercase tracking-wider">
             Status
           </label>
           <select
             value={status}
             onChange={(e) => updateFilters("status", e.target.value)}
-            className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-blue-500/50 appearance-none cursor-pointer"
+            className="w-full bg-foreground/5 border border-foreground/10 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-blue-500/50 appearance-none cursor-pointer text-foreground"
           >
-            <option value="">All Status</option>
+            <option value="" className="bg-background">
+              All Status
+            </option>
             {STATUSES.map((s) => (
-              <option key={s.value} value={s.value}>
+              <option key={s.value} value={s.value} className="bg-background">
                 {s.label}
               </option>
             ))}
@@ -194,17 +222,19 @@ function SearchResults() {
 
         {/* Format Filter */}
         <div className="space-y-2">
-          <label className="text-xs font-bold text-gray-500 uppercase tracking-wider">
+          <label className="text-xs font-bold text-foreground/50 uppercase tracking-wider">
             Format
           </label>
           <select
             value={format}
             onChange={(e) => updateFilters("format", e.target.value)}
-            className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-blue-500/50 appearance-none cursor-pointer"
+            className="w-full bg-foreground/5 border border-foreground/10 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-blue-500/50 appearance-none cursor-pointer text-foreground"
           >
-            <option value="">All Formats</option>
+            <option value="" className="bg-background">
+              All Formats
+            </option>
             {FORMATS.map((f) => (
-              <option key={f.value} value={f.value}>
+              <option key={f.value} value={f.value} className="bg-background">
                 {f.label}
               </option>
             ))}
@@ -213,7 +243,7 @@ function SearchResults() {
 
         {/* Year Filter */}
         <div className="space-y-2">
-          <label className="text-xs font-bold text-gray-500 uppercase tracking-wider">
+          <label className="text-xs font-bold text-foreground/50 uppercase tracking-wider">
             Year
           </label>
           <input
@@ -221,22 +251,22 @@ function SearchResults() {
             placeholder="e.g. 2024"
             value={year}
             onChange={(e) => updateFilters("year", e.target.value)}
-            className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-blue-500/50"
+            className="w-full bg-foreground/5 border border-foreground/10 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-blue-500/50 text-foreground"
           />
         </div>
 
         {/* Sort Filter */}
         <div className="space-y-2">
-          <label className="text-xs font-bold text-gray-500 uppercase tracking-wider">
+          <label className="text-xs font-bold text-foreground/50 uppercase tracking-wider">
             Sort By
           </label>
           <select
             value={sort}
             onChange={(e) => updateFilters("sort", e.target.value)}
-            className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-blue-500/50 appearance-none cursor-pointer"
+            className="w-full bg-foreground/5 border border-foreground/10 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-blue-500/50 appearance-none cursor-pointer text-foreground"
           >
             {SORTS.map((s) => (
-              <option key={s.value} value={s.value}>
+              <option key={s.value} value={s.value} className="bg-background">
                 {s.label}
               </option>
             ))}
@@ -267,7 +297,7 @@ function SearchResults() {
             </>
           ) : (
             <div className="text-center py-20">
-              <p className="text-xl text-gray-400">No results found.</p>
+              <p className="text-xl text-foreground/50">No results found.</p>
             </div>
           )}
         </>
@@ -278,7 +308,7 @@ function SearchResults() {
 
 export default function SearchPage() {
   return (
-    <main className="min-h-screen bg-[#141414] text-white">
+    <main className="min-h-screen bg-background text-foreground">
       <Suspense fallback={<div className="pt-24 text-center">Loading...</div>}>
         <SearchResults />
       </Suspense>
