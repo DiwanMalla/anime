@@ -13,10 +13,13 @@ import {
   BarChart3,
   Hash,
   ExternalLink,
+  Plus,
+  Check,
 } from "lucide-react";
 import AnimeCard from "@/components/AnimeCard";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import WatchlistButton from "@/components/WatchlistButton";
 
 interface PageProps {
   params: Promise<{ id: string }>;
@@ -101,6 +104,8 @@ export default async function AnimeDetailsPage({ params }: PageProps) {
                 className="relative w-64 lg:w-full mx-auto rounded-lg shadow-2xl border border-white/10"
               />
             </div>
+
+            <WatchlistButton anime={anime} className="w-full py-4 text-lg" />
 
             <div className="sci-fi-border p-6 rounded-sm space-y-6">
               <h3 className="font-mono text-[#00f3ff] text-lg border-b border-[#00f3ff]/20 pb-2 uppercase tracking-widest flex items-center gap-2">
@@ -241,6 +246,31 @@ export default async function AnimeDetailsPage({ params }: PageProps) {
                         />
                       </div>
                     </div>
+                  ))}
+                </div>
+              </div>
+            )}
+            {/* External Links */}
+            {anime.externalLinks?.length > 0 && (
+              <div className="sci-fi-border p-6 rounded-sm space-y-4">
+                <h3 className="font-mono text-[#00f3ff] text-lg border-b border-[#00f3ff]/20 pb-2 uppercase tracking-widest flex items-center gap-2">
+                  <ExternalLink className="h-4 w-4" /> External Links
+                </h3>
+                <div className="flex flex-wrap gap-2">
+                  {anime.externalLinks.map((link: any) => (
+                    <a
+                      key={link.id}
+                      href={link.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 px-3 py-1.5 bg-white/5 border border-white/10 rounded hover:bg-white/10 hover:border-[#00f3ff]/50 transition-all text-xs font-mono"
+                      style={{ color: link.color || "inherit" }}
+                    >
+                      {link.icon && (
+                        <img src={link.icon} alt="" className="w-4 h-4" />
+                      )}
+                      {link.site}
+                    </a>
                   ))}
                 </div>
               </div>
@@ -433,27 +463,33 @@ export default async function AnimeDetailsPage({ params }: PageProps) {
                       className="flex justify-between bg-[#0a0a0a] border border-gray-800 rounded hover:border-[#bc13fe]/50 transition-colors p-2 h-24"
                     >
                       {/* Character (Left) */}
-                      <div className="flex gap-3 h-full">
+                      <Link
+                        href={`/character/${char.node.id}`}
+                        className="flex gap-3 h-full group/char"
+                      >
                         <img
                           src={char.node.image.large || char.node.image.medium}
                           alt={char.node.name.full}
-                          className="w-14 h-full object-cover rounded"
+                          className="w-14 h-full object-cover rounded group-hover/char:opacity-80 transition-opacity"
                         />
                         <div className="flex flex-col justify-center">
-                          <div className="text-sm font-bold text-white line-clamp-2 leading-tight">
+                          <div className="text-sm font-bold text-white line-clamp-2 leading-tight group-hover/char:text-[#bc13fe] transition-colors">
                             {char.node.name.full}
                           </div>
                           <div className="text-xs text-gray-500 font-mono uppercase mt-1">
                             {char.role}
                           </div>
                         </div>
-                      </div>
+                      </Link>
 
                       {/* Voice Actor (Right) */}
                       {char.voiceActors?.[0] && (
-                        <div className="flex gap-3 h-full text-right">
+                        <Link
+                          href={`/staff/${char.voiceActors[0].id}`}
+                          className="flex gap-3 h-full text-right group/staff"
+                        >
                           <div className="flex flex-col justify-center items-end">
-                            <div className="text-sm font-bold text-white line-clamp-2 leading-tight">
+                            <div className="text-sm font-bold text-white line-clamp-2 leading-tight group-hover/staff:text-[#bc13fe] transition-colors">
                               {char.voiceActors[0].name.full}
                             </div>
                             <div className="text-xs text-gray-500 font-mono uppercase mt-1">
@@ -461,11 +497,14 @@ export default async function AnimeDetailsPage({ params }: PageProps) {
                             </div>
                           </div>
                           <img
-                            src={char.voiceActors[0].image.large || char.voiceActors[0].image.medium}
+                            src={
+                              char.voiceActors[0].image.large ||
+                              char.voiceActors[0].image.medium
+                            }
                             alt={char.voiceActors[0].name.full}
-                            className="w-14 h-full object-cover rounded"
+                            className="w-14 h-full object-cover rounded group-hover/staff:opacity-80 transition-opacity"
                           />
-                        </div>
+                        </Link>
                       )}
                     </div>
                   ))}
@@ -481,17 +520,18 @@ export default async function AnimeDetailsPage({ params }: PageProps) {
                 </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-[1400px]">
                   {anime.staff.edges.map((staff: any, index: number) => (
-                    <div
+                    <Link
                       key={`${staff.node.id}-${staff.role}-${index}`}
-                      className="flex items-center gap-4 bg-[#0a0a0a] border border-gray-800 p-3 rounded hover:border-[#bc13fe]/30 transition-colors h-24"
+                      href={`/staff/${staff.node.id}`}
+                      className="flex items-center gap-4 bg-[#0a0a0a] border border-gray-800 p-3 rounded hover:border-[#bc13fe]/30 transition-colors h-24 group"
                     >
                       <img
                         src={staff.node.image.large || staff.node.image.medium}
                         alt={staff.node.name.full}
-                        className="w-16 h-full object-cover rounded"
+                        className="w-16 h-full object-cover rounded group-hover:opacity-80 transition-opacity"
                       />
                       <div className="flex flex-col justify-center min-w-0">
-                        <div className="text-sm font-bold text-white truncate">
+                        <div className="text-sm font-bold text-white truncate group-hover:text-[#bc13fe] transition-colors">
                           {staff.node.name.full}
                         </div>
                         {staff.node.name.native && (
@@ -503,7 +543,7 @@ export default async function AnimeDetailsPage({ params }: PageProps) {
                           {staff.role}
                         </div>
                       </div>
-                    </div>
+                    </Link>
                   ))}
                 </div>
               </div>

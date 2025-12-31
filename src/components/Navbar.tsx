@@ -1,10 +1,47 @@
 "use client";
 
 import Link from "next/link";
-import { Search, Bell, User, Menu, X, Sparkles, Star } from "lucide-react";
+import {
+  Search,
+  Bell,
+  User,
+  Menu,
+  X,
+  Sparkles,
+  Star,
+  Sun,
+  Moon,
+} from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
-import { fetchAniList, SEARCH_ANIME_QUERY } from "@/lib/anilist";
+import {
+  fetchAniList,
+  SEARCH_ANIME_QUERY,
+  getRandomAnime,
+} from "@/lib/anilist";
+import { useTheme } from "next-themes";
+
+function ThemeToggle() {
+  const [mounted, setMounted] = useState(false);
+  const { theme, setTheme } = useTheme();
+
+  useEffect(() => setMounted(true), []);
+
+  if (!mounted) return <div className="w-9 h-9" />;
+
+  return (
+    <button
+      onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+      className="p-2 text-gray-400 hover:text-[#ff6b9d] transition-colors rounded-xl bg-white/5 border border-white/10"
+    >
+      {theme === "dark" ? (
+        <Sun className="h-5 w-5" />
+      ) : (
+        <Moon className="h-5 w-5" />
+      )}
+    </button>
+  );
+}
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -14,6 +51,22 @@ export default function Navbar() {
   const [showSuggestions, setShowSuggestions] = useState(false);
   const searchRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
+  const [isSurprising, setIsSurprising] = useState(false);
+
+  const handleSurpriseMe = async () => {
+    if (isSurprising) return;
+    setIsSurprising(true);
+    try {
+      const anime = await getRandomAnime();
+      if (anime) {
+        router.push(`/anime/${anime.id}`);
+      }
+    } catch (error) {
+      console.error("Error getting random anime:", error);
+    } finally {
+      setIsSurprising(false);
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -95,9 +148,11 @@ export default function Navbar() {
           <div className="hidden md:flex items-center gap-1">
             {[
               { href: "/", label: "Home" },
-              { href: "/trending", label: "Trending" },
-              { href: "/popular", label: "Popular" },
-              { href: "/upcoming", label: "Upcoming" },
+              { href: "/watchlist", label: "Watchlist" },
+              { href: "/seasonal", label: "Seasonal" },
+              { href: "/schedule", label: "Schedule" },
+              { href: "/genres", label: "Genres" },
+              { href: "/manga", label: "Manga" },
             ].map((link) => (
               <Link
                 key={link.href}
@@ -186,6 +241,15 @@ export default function Navbar() {
 
           {/* User Actions */}
           <div className="flex items-center gap-3">
+            <button
+              onClick={handleSurpriseMe}
+              disabled={isSurprising}
+              className="hidden lg:flex items-center gap-2 px-4 py-2 bg-[#ff6b9d]/10 hover:bg-[#ff6b9d]/20 border border-[#ff6b9d]/30 rounded-xl text-[#ff6b9d] text-sm font-bold transition-all group disabled:opacity-50"
+            >
+              <Sparkles className={`h-4 w-4 ${isSurprising ? 'animate-spin' : 'group-hover:rotate-12'} transition-transform`} />
+              <span>{isSurprising ? 'Finding...' : 'Surprise Me'}</span>
+            </button>
+            <ThemeToggle />
             <button className="relative p-2 text-gray-400 hover:text-[#ff6b9d] transition-colors group">
               <Bell className="h-5 w-5" />
               <span className="absolute top-1 right-1 w-2 h-2 bg-[#ff6b9d] rounded-full" />
@@ -225,13 +289,34 @@ export default function Navbar() {
             />
           </form>
           <div className="flex flex-col gap-4 font-mono text-sm">
-            <Link
-              href="/"
-              className="text-gray-300 hover:text-[#00f3ff] uppercase tracking-widest"
-              onClick={() => setIsMobileMenuOpen(false)}
+            {[
+              { href: "/", label: "Home" },
+              { href: "/watchlist", label: "Watchlist" },
+              { href: "/seasonal", label: "Seasonal" },
+              { href: "/schedule", label: "Schedule" },
+              { href: "/genres", label: "Genres" },
+              { href: "/manga", label: "Manga" },
+            ].map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="text-gray-300 hover:text-[#00f3ff] uppercase tracking-widest"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                {link.label}
+              </Link>
+            ))}
+            <button
+              onClick={() => {
+                handleSurpriseMe();
+                setIsMobileMenuOpen(false);
+              }}
+              disabled={isSurprising}
+              className="flex items-center gap-2 text-[#ff6b9d] uppercase tracking-widest font-bold disabled:opacity-50"
             >
-              Home
-            </Link>
+              <Sparkles className={`h-4 w-4 ${isSurprising ? 'animate-spin' : ''}`} />
+              <span>{isSurprising ? 'Finding...' : 'Surprise Me'}</span>
+            </button>
             <Link
               href="/trending"
               className="text-gray-300 hover:text-[#00f3ff] uppercase tracking-widest"

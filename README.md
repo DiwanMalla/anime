@@ -1,84 +1,101 @@
-# Anime Nexus
+# AniNexus
 
-Anime Nexus is a modern, responsive web application for discovering and exploring anime. Built with Next.js 16 and Tailwind CSS, it leverages the AniList GraphQL API to provide real-time data on trending, popular, and upcoming anime titles.
+AniNexus is a high-performance, feature-rich anime and manga discovery platform. Built with **Next.js 16**, **React 19**, and **Tailwind CSS**, it provides a seamless experience for exploring the vast world of Japanese animation and comics using the AniList GraphQL API.
 
-## Features
+## ✨ Key Features
 
-- **Home Page**: curated lists of Trending, Popular, Top Rated, and Upcoming anime.
-- **Hero Section**: Showcases the top trending anime with a dynamic background and large visuals.
-- **Anime Details**: Comprehensive information including score, episodes, studio, genre, characters (with voice actors), staff, trailer, and recommendations.
-- **Search**: Real-time search functionality with instant dropdown suggestions.
-- **Responsive Design**: Fully optimized for desktop and mobile devices with a custom navigation bar and mobile menu.
-- **Modern UI**: sleek dark mode aesthetic featuring glassmorphism, gradients, and smooth transitions.
+- **🚀 Discovery Hub**: Real-time lists of Trending, Popular, Top Rated, and Upcoming anime and manga.
+- **📅 Airing Schedule**: A weekly calendar view to track when your favorite shows are releasing.
+- **🎭 Deep Details**: Comprehensive pages for Anime, Manga, Characters, and Staff members.
+- **🔍 Advanced Search**: Powerful search engine with filters for genres, tags, status, format, and release year.
+- **🏷️ Genre Explorer**: A visual way to browse anime by specific tags and genres.
+- **🎲 Surprise Me**: Instantly discover a random highly-rated anime with a single click.
+- **⭐ Watchlist**: Save your favorite titles to a local watchlist for easy access.
+- **📱 PWA Ready**: Installable on mobile and desktop for an app-like experience.
+- **🌓 Dark Mode**: A sleek, modern aesthetic with glassmorphism and smooth Framer Motion animations.
 
-## Tech Stack
+## 🛠️ Tech Stack
 
 - **Framework**: [Next.js 16](https://nextjs.org/) (App Router)
 - **Language**: [TypeScript](https://www.typescriptlang.org/)
-- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+- **Styling**: [Tailwind CSS 4](https://tailwindcss.com/)
 - **Icons**: [Lucide React](https://lucide.dev/)
 - **Animation**: [Framer Motion](https://www.framer.com/motion/)
 - **Data Source**: [AniList GraphQL API](https://anilist.co/graphiql)
-- **Utilities**: `tailwind-merge`, `clsx`
+- **State Management**: React Context API (for Watchlist)
+- **PWA**: `@ducanh2912/next-pwa`
 
-## Getting Started
+## 📂 Project Structure
+
+```text
+src/
+├── app/                 # Next.js App Router (Pages & API)
+│   ├── anime/[id]/      # Anime details
+│   ├── manga/[id]/      # Manga details
+│   ├── character/[id]/  # Character profiles
+│   ├── staff/[id]/      # Staff/Voice actor profiles
+│   ├── schedule/        # Weekly airing calendar
+│   ├── genres/          # Genre & Tag explorer
+│   ├── watchlist/       # User's saved titles
+│   └── search/          # Advanced search results
+├── components/          # Reusable UI components
+│   ├── Navbar.tsx       # Dynamic navigation with search
+│   ├── AnimeCard.tsx    # Reusable media card
+│   ├── MangaCard.tsx    # Specialized manga card
+│   └── ...              # Layout & UI components
+├── context/             # Global state (WatchlistContext)
+└── lib/                 # Core logic & API queries
+    └── anilist.ts       # GraphQL queries and fetcher
+```
+
+## 🚀 Getting Started
 
 ### Prerequisites
 
-- Node.js (v18 or newer recommended)
-- npm, yarn, pnpm, or bun
+- Node.js (v18+)
+- npm / yarn / pnpm
 
 ### Installation
 
-1. Clone the repository:
+1. **Clone the repository**
+
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/DiwanMalla/anime.git
    cd anime
    ```
 
-2. Install dependencies:
+2. **Install dependencies**
+
    ```bash
    npm install
-   # or
-   yarn install
-   # or
-   pnpm install
    ```
 
-3. Run the development server:
+3. **Run the development server**
+
    ```bash
    npm run dev
-   # or
-   yarn dev
-   # or
-   pnpm dev
    ```
 
-4. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4. **Build for production**
+   ```bash
+   npm run build
+   npm start
+   ```
 
-## Project Structure
+## 🤝 Contributing
 
-```
-src/
-├── app/                 # Next.js App Router pages
-│   ├── page.tsx         # Home page
-│   ├── layout.tsx       # Root layout
-│   ├── anime/           # Anime details route
-│   │   └── [id]/page.tsx
-│   └── search/          # Search results route
-├── components/          # Reusable UI components
-│   ├── Navbar.tsx       # Navigation bar with search
-│   ├── AnimeCard.tsx    # Card component for anime items
-│   ├── Footer.tsx       # Application footer
-│   └── Skeleton.tsx     # Loading state skeleton
-└── lib/                 # Utilities
-    └── anilist.ts       # AniList GraphQL API queries and fetcher
-```
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
-## Contributing
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+## 📜 License
 
-## License
+Distributed under the MIT License. See `LICENSE` for more information.
 
-This project is open source and available under the [MIT License](LICENSE).
+---
+
+Built with ❤️ by [Diwan Malla](https://github.com/DiwanMalla)
