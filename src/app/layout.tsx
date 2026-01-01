@@ -13,8 +13,18 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "AniVerse - Stream Anime & Manga Online | Your Ultimate Anime Hub",
-  description: "Watch your favorite anime and read manga online at AniVerse. Discover trending series, track your watchlist, and stay updated with the airing schedule. The most premium anime streaming experience.",
-  keywords: ["anime", "manga", "streaming", "watch anime", "read manga", "aniverse", "anime database", "airing schedule"],
+  description:
+    "Watch your favorite anime and read manga online at AniVerse. Discover trending series, track your watchlist, and stay updated with the airing schedule. The most premium anime streaming experience.",
+  keywords: [
+    "anime",
+    "manga",
+    "streaming",
+    "watch anime",
+    "read manga",
+    "aniverse",
+    "anime database",
+    "airing schedule",
+  ],
   authors: [{ name: "AniVerse Team" }],
   creator: "AniVerse",
   publisher: "AniVerse",
@@ -23,14 +33,17 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL("https://aniverse-anime.vercel.app"), // Placeholder, update to actual domain
+  other: {
+    "google-adsense-account": "ca-pub-4639608980089431",
+  },
+  metadataBase: new URL("https://www.aninexus.store"),
   alternates: {
     canonical: "/",
   },
   openGraph: {
     title: "AniVerse - Stream Anime & Manga Online",
     description: "The most premium anime and manga community platform.",
-    url: "https://aniverse-anime.vercel.app",
+    url: "https://www.aninexus.store",
     siteName: "AniVerse",
     locale: "en_US",
     type: "website",
