@@ -82,14 +82,6 @@ export default function Footer() {
                   Corporate Information
                 </Link>
               </li>
-              <li>
-                <Link
-                  href="/media-center"
-                  className="hover:text-slate-200 transition-colors"
-                >
-                  Media Center
-                </Link>
-              </li>
             </ul>
           </div>
           <div>
