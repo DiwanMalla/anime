@@ -8,104 +8,34 @@ export const metadata = {
 
 export default function CorporateInformationPage() {
   return (
-    <InfoPageLayout title="Corporate Information">
-      <div className="space-y-6 text-slate-300 leading-relaxed">
-        <p className="text-lg text-blue-400 mb-8">
-          AniNexus is a leading anime and manga discovery platform, committed to
-          bringing the best of Japanese animation to fans worldwide.
-        </p>
-
-        <div className="grid md:grid-cols-2 gap-6 mb-8">
-          <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
-            <Building2 className="h-8 w-8 text-blue-400 mb-4" />
-            <h3 className="text-xl font-semibold text-slate-100 mb-2">
-              Company Overview
-            </h3>
-            <div className="space-y-2 text-slate-400">
-              <p>
-                <strong className="text-slate-300">Founded:</strong> 2020
-              </p>
-              <p>
-                <strong className="text-slate-300">Headquarters:</strong> Tokyo,
-                Japan
-              </p>
-              <p>
-                <strong className="text-slate-300">CEO:</strong> Diwan Malla
-              </p>
-            </div>
-          </div>
-
-          <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
-            <Users className="h-8 w-8 text-emerald-400 mb-4" />
-            <h3 className="text-xl font-semibold text-slate-100 mb-2">
-              Our Team
-            </h3>
-            <div className="space-y-2 text-slate-400">
-              <p>
-                <strong className="text-slate-300">Employees:</strong> 50+
-              </p>
-              <p>
-                <strong className="text-slate-300">Engineers:</strong> 25
-              </p>
-              <p>
-                <strong className="text-slate-300">Support Staff:</strong> 15
-              </p>
-            </div>
-          </div>
-
-          <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
-            <Globe className="h-8 w-8 text-purple-400 mb-4" />
-            <h3 className="text-xl font-semibold text-slate-100 mb-2">
-              Global Reach
-            </h3>
-            <div className="space-y-2 text-slate-400">
-              <p>
-                <strong className="text-slate-300">Users:</strong> 1M+ worldwide
-              </p>
-              <p>
-                <strong className="text-slate-300">Countries:</strong> 50+
-              </p>
-              <p>
-                <strong className="text-slate-300">Languages:</strong> 15
-              </p>
-            </div>
-          </div>
-
-          <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
-            <Award className="h-8 w-8 text-amber-400 mb-4" />
-            <h3 className="text-xl font-semibold text-slate-100 mb-2">
-              Awards
-            </h3>
-            <div className="space-y-2 text-slate-400">
-              <p>Best Anime Platform 2024</p>
-              <p>Innovation in Streaming</p>
-              <p>User Choice Award</p>
-            </div>
-          </div>
+    <InfoPageLayout title="Developer Details">
+      <div className="space-y-8 text-slate-300 leading-relaxed max-w-2xl mx-auto">
+        <div className="flex flex-col items-center gap-4">
+          <img
+            src="https://avatars.githubusercontent.com/u/10268051?v=4"
+            alt="Diwan Malla"
+            className="w-28 h-28 rounded-full border-4 border-emerald-500 shadow-lg"
+          />
+          <h1 className="text-3xl font-bold text-slate-100">Diwan Malla</h1>
+          <p className="text-emerald-400 font-medium">Full Stack Developer & Anime Enthusiast</p>
         </div>
-
-        <section className="space-y-4 bg-slate-800/30 rounded-xl p-6 border border-slate-700">
-          <h2 className="text-2xl font-bold text-slate-100 tracking-tight">
-            Mission Statement
-          </h2>
+        <div className="space-y-2">
           <p>
-            Our mission is to make anime and manga accessible to everyone,
-            everywhere. We believe in the power of storytelling to connect
-            people across cultures and create meaningful experiences.
+            <span className="font-semibold text-slate-200">Email:</span> <a href="mailto:diwanmallaa@gmail.com" className="text-blue-400 hover:underline">diwanmallaa@gmail.com</a>
           </p>
-        </section>
-
-        <section className="space-y-4 bg-slate-800/30 rounded-xl p-6 border border-slate-700">
-          <h2 className="text-2xl font-bold text-slate-100 tracking-tight">
-            Corporate Governance
-          </h2>
           <p>
-            AniNexus maintains the highest standards of corporate governance,
-            ensuring transparency, accountability, and ethical business
-            practices. Our board of directors includes industry veterans and
-            anime enthusiasts committed to sustainable growth.
+            <span className="font-semibold text-slate-200">GitHub:</span> <a href="https://github.com/DiwanMalla" className="text-blue-400 hover:underline" target="_blank" rel="noopener noreferrer">github.com/DiwanMalla</a>
           </p>
-        </section>
+          <p>
+            <span className="font-semibold text-slate-200">Location:</span> Kathmandu, Nepal
+          </p>
+        </div>
+        <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-700 mt-6">
+          <h2 className="text-xl font-bold text-slate-100 mb-2">About Me</h2>
+          <p>
+            I am a passionate developer with a love for anime, manga, and building modern web applications. I created AniNexus to help fans discover, track, and enjoy their favorite series with ease. Always learning, always building!
+          </p>
+        </div>
       </div>
     </InfoPageLayout>
   );
