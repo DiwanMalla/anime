@@ -3,97 +3,123 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="bg-slate-950 text-slate-400 py-16 text-sm border-t border-slate-800">
-      <div className="max-w-[1200px] mx-auto px-4">
-        <div className="flex gap-6 mb-10">
-          <a
-            href="https://facebook.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-blue-400 transition-colors"
-          >
-            <Facebook className="h-6 w-6" />
-          </a>
-          <a
-            href="https://instagram.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-blue-400 transition-colors"
-          >
-            <Instagram className="h-6 w-6" />
-          </a>
-          <a
-            href="https://twitter.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-blue-400 transition-colors"
-          >
-            <Twitter className="h-6 w-6" />
-          </a>
-          <a
-            href="https://github.com/DiwanMalla/anime"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-blue-400 transition-colors"
-          >
-            <Github className="h-6 w-6" />
-          </a>
+    <footer className="bg-slate-950 text-slate-400 py-10 text-sm border-t border-slate-800">
+      <div className="max-w-6xl mx-auto px-4 flex flex-col gap-8">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+          <div className="flex gap-4 justify-center md:justify-start">
+            <a
+              href="https://facebook.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Facebook"
+              className="hover:text-blue-400 transition-colors"
+            >
+              <Facebook className="h-5 w-5" />
+            </a>
+            <a
+              href="https://instagram.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram"
+              className="hover:text-pink-400 transition-colors"
+            >
+              <Instagram className="h-5 w-5" />
+            </a>
+            <a
+              href="https://twitter.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Twitter"
+              className="hover:text-sky-400 transition-colors"
+            >
+              <Twitter className="h-5 w-5" />
+            </a>
+            <a
+              href="https://github.com/DiwanMalla/anime"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub"
+              className="hover:text-emerald-400 transition-colors"
+            >
+              <Github className="h-5 w-5" />
+            </a>
+          </div>
+          <div className="flex justify-center md:justify-end">
+            <button className="border border-slate-700 px-4 py-1.5 rounded-md hover:text-slate-200 hover:border-slate-600 hover:bg-slate-900/50 transition-all text-xs">
+              Service Code
+            </button>
+          </div>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-10">
-          <ul className="space-y-3">
-            <li className="hover:text-slate-200 transition-colors">
-              {/* Audio Description link removed */}
-            </li>
-            <li className="hover:text-slate-200 transition-colors">
-              {/* Investor Relations link removed */}
-            </li>
-            <li className="hover:text-slate-200 transition-colors">
-              {/* Legal Notices link removed */}
-            </li>
-          </ul>
-          <ul className="space-y-3">
-            <li className="hover:text-slate-200 transition-colors">
-              <Link href="/help-center">Help Center</Link>
-            </li>
-            <li className="hover:text-slate-200 transition-colors">
-              {/* Jobs link removed */}
-            </li>
-            <li className="hover:text-slate-200 transition-colors">
-              {/* Cookie Preferences link removed */}
-            </li>
-          </ul>
-          <ul className="space-y-3">
-            <li className="hover:text-slate-200 transition-colors">
-              {/* Gift Cards link removed */}
-            </li>
-            <li className="hover:text-slate-200 transition-colors">
-              <Link href="/terms-of-use">Terms of Use</Link>
-            </li>
-            <li className="hover:text-slate-200 transition-colors">
-              <Link href="/corporate-information">Corporate Information</Link>
-            </li>
-          </ul>
-          <ul className="space-y-3">
-            <li className="hover:text-slate-200 transition-colors">
-              <Link href="/media-center">Media Center</Link>
-            </li>
-            <li className="hover:text-slate-200 transition-colors">
-              <Link href="/privacy">Privacy</Link>
-            </li>
-            <li className="hover:text-slate-200 transition-colors">
-              <Link href="/contact-us">Contact Us</Link>
-            </li>
-          </ul>
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 md:gap-8">
+          <div>
+            <ul className="space-y-2">
+              <li>
+                <Link
+                  href="/help-center"
+                  className="hover:text-slate-200 transition-colors"
+                >
+                  Help Center
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/terms-of-use"
+                  className="hover:text-slate-200 transition-colors"
+                >
+                  Terms of Use
+                </Link>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <ul className="space-y-2">
+              <li>
+                <Link
+                  href="/corporate-information"
+                  className="hover:text-slate-200 transition-colors"
+                >
+                  Corporate Information
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/media-center"
+                  className="hover:text-slate-200 transition-colors"
+                >
+                  Media Center
+                </Link>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <ul className="space-y-2">
+              <li>
+                <Link
+                  href="/privacy"
+                  className="hover:text-slate-200 transition-colors"
+                >
+                  Privacy
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/contact-us"
+                  className="hover:text-slate-200 transition-colors"
+                >
+                  Contact Us
+                </Link>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <ul className="space-y-2">
+              {/* Add more links or info here if needed */}
+            </ul>
+          </div>
         </div>
 
-        <div className="mb-6">
-          <button className="border border-slate-700 px-5 py-2 rounded-md hover:text-slate-200 hover:border-slate-600 hover:bg-slate-900/50 transition-all">
-            Service Code
-          </button>
-        </div>
-
-        <div className="text-xs text-slate-500">
+        <div className="text-center text-xs text-slate-500 pt-4 border-t border-slate-800">
           &copy; {new Date().getFullYear()} AniNexus, Inc. All rights reserved.
         </div>
       </div>
