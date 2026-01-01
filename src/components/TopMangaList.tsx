@@ -85,7 +85,7 @@ export default function TopMangaList({ mangaList }: TopMangaListProps) {
                   {manga.format}
                 </span>
                 <span className="text-xs text-gray-500">
-                  {manga.chapters || "?"} chapters
+                  {manga.chapters || (manga.status === "RELEASING" ? "Live" : "?")} chapters
                 </span>
               </div>
 

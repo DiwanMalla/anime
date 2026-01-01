@@ -47,32 +47,51 @@ export default function ProfilePage() {
           </div>
 
           <div className="relative pt-16 pb-12 px-8 flex flex-col md:flex-row items-center md:items-end gap-8">
-            {/* Avatar Section */}
+            {/* Premium Anime Avatar Icon */}
             <div className="relative">
               <motion.div 
                 initial={{ scale: 0.9, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 whileHover={{ scale: 1.05 }}
+                className="relative z-10"
               >
-                <div className="w-40 h-40 md:w-48 md:h-48 rounded-3xl overflow-hidden border-2 border-[#00f3ff]/30 shadow-2xl bg-black">
-                  <img
-                    src="/nano-banana.png"
-                    alt="Nano Banana Avatar"
-                    className="w-full h-full object-cover"
-                  />
+                <div className="w-40 h-40 md:w-48 md:h-48 rounded-3xl flex items-center justify-center bg-black border-2 border-white/5 relative overflow-hidden shadow-[0_0_50px_rgba(0,243,255,0.1)]">
+                   {/* Animated Background Grids */}
+                   <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:20px_20px]" />
+                   
+                   {/* Holographic Character Frame */}
+                   <div className="relative z-20 w-32 h-32 md:w-36 md:h-36 flex items-center justify-center">
+                      <div className="absolute inset-0 bg-gradient-to-br from-[#bc13fe] to-[#00f3ff] opacity-10 blur-xl rounded-full animate-pulse" />
+                      <div className="w-full h-full border border-white/10 rounded-full flex items-center justify-center relative backdrop-blur-sm">
+                         {/* Stylized Character Icon */}
+                         <div className="text-white/80 filter drop-shadow-[0_0_10px_rgba(0,243,255,1)]">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-20 h-20 md:w-24 md:h-24">
+                               <path d="M19 21v-2a4 4 0 0 0-3-3.87" />
+                               <path d="M3 21v-2a4 4 0 0 1 3-3.87" />
+                               <circle cx="12" cy="7" r="4" />
+                            </svg>
+                         </div>
+                      </div>
+                      
+                      {/* TECH HALO */}
+                      <div className="absolute inset-[-10px] border-2 border-dashed border-[#00f3ff]/20 rounded-full animate-[spin_20s_linear_infinite]" />
+                   </div>
+
+                   {/* Corner Accents */}
+                   <div className="absolute top-0 right-0 p-1">
+                      <div className="w-10 h-10 border-t border-r border-[#bc13fe]/40 rounded-tr-lg" />
+                   </div>
+                   <div className="absolute bottom-0 left-0 p-1">
+                      <div className="w-10 h-10 border-b border-l border-[#00f3ff]/40 rounded-bl-lg" />
+                   </div>
                 </div>
-                {isEditing && (
-                  <button className="absolute inset-0 flex items-center justify-center bg-black/60 rounded-3xl opacity-100 transition-opacity z-20">
-                    <Camera className="w-8 h-8 text-white" />
-                  </button>
-                )}
               </motion.div>
               
-              {/* AI Badge */}
-              <div className="absolute -bottom-2 -right-2">
-                 <div className="flex items-center gap-1.5 bg-background border border-[#00f3ff]/50 px-3 py-1.5 rounded-full shadow-lg">
-                    <Sparkles className="w-3.5 h-3.5 text-[#00f3ff]" />
-                    <span className="text-[10px] font-bold text-foreground">Nano Banana AI Beta</span>
+              {/* Profile Status */}
+              <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 z-20">
+                 <div className="bg-background border border-[#00f3ff]/50 px-4 py-1.5 rounded-full shadow-2xl flex items-center gap-2">
+                    <div className="w-2 h-2 rounded-full bg-[#00f3ff] animate-pulse" />
+                    <span className="text-[10px] font-black tracking-widest text-[#00f3ff] uppercase">Anime Sync active</span>
                  </div>
               </div>
             </div>

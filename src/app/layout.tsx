@@ -1,10 +1,12 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Providers } from "@/components/Providers";
 import { Analytics } from "@vercel/analytics/next";
+import AniGenie from "@/components/AniGenie";
+import NotificationManager from "@/components/NotificationManager";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -34,7 +36,9 @@ export default function RootLayout({
       >
         <Providers>
           <Navbar />
-          {children}
+          <NotificationManager />
+          <main className="flex-1 overflow-x-hidden">{children}</main>
+          <AniGenie />
           <Footer />
           <Analytics />
         </Providers>

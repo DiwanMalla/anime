@@ -22,6 +22,8 @@ import Link from "next/link";
 import WatchlistButton from "@/components/WatchlistButton";
 import CommunityLayer from "@/components/CommunityLayer";
 import DetailTabs from "@/components/DetailTabs";
+import TrailerButton from "@/components/TrailerButton";
+import WatchNowButton from "@/components/WatchNowButton";
 
 interface PageProps {
   params: Promise<{ id: string }>;
@@ -108,6 +110,14 @@ export default async function AnimeDetailsPage({ params }: PageProps) {
             </div>
 
             <WatchlistButton anime={anime} className="w-full py-4 text-lg" />
+            
+            <div className="flex flex-col gap-3">
+              <WatchNowButton streamingEpisodes={anime.streamingEpisodes} />
+              <TrailerButton 
+                trailerId={anime.trailer?.id} 
+                title={title} 
+              />
+            </div>
 
             <div className="anime-panel p-6 rounded-sm space-y-6">
               <h3 className="font-mono text-anime-blue text-lg border-b border-anime-blue/20 pb-2 uppercase tracking-widest flex items-center gap-2">

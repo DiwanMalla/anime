@@ -67,7 +67,7 @@ export default function MangaCard({ manga }: MangaCardProps) {
           }}
         />
 
-        <div className="relative bg-anime-dark/80 backdrop-blur-md rounded-2xl overflow-hidden border border-foreground/10 hover:border-foreground/20 transition-all duration-500 shadow-2xl">
+        <div className="relative bg-background/80 backdrop-blur-md rounded-2xl overflow-hidden border border-foreground/10 hover:border-foreground/20 transition-all duration-500 shadow-2xl">
           <div className="relative aspect-[2/3] w-full overflow-hidden">
             <img
               src={manga.coverImage.large}
@@ -75,7 +75,7 @@ export default function MangaCard({ manga }: MangaCardProps) {
               className="object-cover w-full h-full transition-transform duration-1000 hover:scale-110 hover:rotate-1"
             />
 
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0a0014] via-[#0a0014]/20 to-transparent opacity-80 hover:opacity-60 transition-opacity duration-500" />
+            <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent opacity-80 hover:opacity-60 transition-opacity duration-500" />
 
             <div className="absolute top-3 left-3 flex flex-col gap-2 z-30">
               {manga.format && (
@@ -146,7 +146,9 @@ export default function MangaCard({ manga }: MangaCardProps) {
               <div className="flex items-center gap-1.5 text-foreground/50">
                 <Layers className="h-3 w-3" />
                 <span className="text-[10px] font-medium">
-                  {manga.chapters || "?"} CH
+                  {manga.chapters ||
+                    (manga.status === "RELEASING" ? "Live" : "?")}{" "}
+                  CH
                 </span>
               </div>
               <div

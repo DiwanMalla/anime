@@ -90,7 +90,7 @@ export default function TopAnimeList({ animeList }: TopAnimeListProps) {
                   {anime.format === "TV" ? "TV Show" : anime.format}
                 </span>
                 <span className="text-xs text-gray-500">
-                  {anime.episodes} episodes
+                  {anime.episodes || (anime.status === "RELEASING" ? "Live" : "?")} episodes
                 </span>
               </div>
 

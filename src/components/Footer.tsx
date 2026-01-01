@@ -43,7 +43,7 @@ export default function Footer() {
         </div>
 
         <div className="mb-4">
-          <button className="border border-gray-400 px-4 py-1 hover:text-white hover:border-white transition">
+          <button className="border border-foreground/40 px-4 py-1 hover:text-foreground hover:border-foreground transition">
             Service Code
           </button>
         </div>

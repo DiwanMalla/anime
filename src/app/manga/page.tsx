@@ -8,6 +8,7 @@ import MangaCard from "@/components/MangaCard";
 import TopMangaList from "@/components/TopMangaList";
 import Link from "next/link";
 import { Play, Info, ChevronRight, BookOpen } from "lucide-react";
+import ContinueReadingRow from "@/components/ContinueReadingRow";
 
 export default async function MangaPage() {
   const [trendingData, popularData, topRatedData] = await Promise.all([
@@ -64,6 +65,7 @@ export default async function MangaPage() {
       )}
 
       <div className="relative z-20 -mt-32 space-y-12 px-4 md:px-12">
+        <ContinueReadingRow />
         <MangaRow title="Trending Manga" items={trending} />
         <MangaRow title="Popular Manga" items={popular} />
 

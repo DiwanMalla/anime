@@ -355,6 +355,11 @@ export const MANGA_DETAILS_QUERY = `
           name
         }
       }
+      trailer {
+        id
+        site
+        thumbnail
+      }
       externalLinks {
         id
         site

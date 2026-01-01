@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 /* Hide Scrollbar Utility */
 .hide-scrollbar {
   scrollbar-width: none; /* Firefox */
@@ -6,7 +8,6 @@
 .hide-scrollbar::-webkit-scrollbar {
   display: none; /* Chrome, Safari, Opera */
 }
-@import "tailwindcss";
 
 :root {
   --background: #ffffff;
@@ -31,6 +32,43 @@
   --anime-dark: #1a0a2e;
   --glass-border: rgba(255, 255, 255, 0.08);
 }
+
+.cyber {
+  --background: #050505;
+  --foreground: #00f3ff;
+  --anime-pink: #bc13fe;
+  --anime-purple: #7000ff;
+  --anime-blue: #00f3ff;
+  --anime-gold: #ff00ea;
+  --anime-red: #ff0055;
+  --anime-dark: #0d0d0d;
+  --glass-border: rgba(0, 243, 255, 0.2);
+}
+
+.sakura {
+  --background: #fff5f7;
+  --foreground: #632c3b;
+  --anime-pink: #ff85a1;
+  --anime-purple: #fbb1bd;
+  --anime-blue: #70e000;
+  --anime-gold: #ffcc33;
+  --anime-red: #e63946;
+  --anime-dark: #ffe5ec;
+  --glass-border: rgba(255, 133, 161, 0.2);
+}
+
+.midnight {
+  --background: #000000;
+  --foreground: #ffffff;
+  --anime-pink: #f1c40f;
+  --anime-purple: #e67e22;
+  --anime-blue: #f39c12;
+  --anime-gold: #f1c40f;
+  --anime-red: #e74c3c;
+  --anime-dark: #0a0a0a;
+  --glass-border: rgba(241, 196, 15, 0.2);
+}
+
 
 @theme inline {
   --color-background: var(--background);

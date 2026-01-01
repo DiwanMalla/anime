@@ -24,21 +24,38 @@ import { useTheme } from "next-themes";
 function ThemeToggle() {
   const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
+  
+  const themes = ['light', 'dark', 'cyber', 'sakura', 'midnight'];
 
   useEffect(() => setMounted(true), []);
 
   if (!mounted) return <div className="w-9 h-9" />;
 
+  const cycleTheme = () => {
+    const currentIndex = themes.indexOf(theme || "dark");
+    const nextIndex = (currentIndex + 1) % themes.length;
+    setTheme(themes[nextIndex]);
+  };
+
+  const getIcon = () => {
+    switch (theme) {
+      case "light": return <Sun className="h-4 w-4" />;
+      case "cyber": return <Sparkles className="h-4 w-4 text-[#00f3ff]" />;
+      case "sakura": return <Star className="h-4 w-4 text-[#ff85a1]" />;
+      case "midnight": return <Moon className="h-4 w-4 text-[#ffd93d] fill-[#ffd93d]" />;
+      default: return <Moon className="h-4 w-4" />;
+    }
+  };
+
   return (
     <button
-      onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-      className="p-2 text-foreground/50 hover:text-anime-pink transition-colors rounded-xl bg-foreground/5 border border-foreground/10"
+      onClick={cycleTheme}
+      className="group relative flex items-center justify-center p-2 text-foreground/50 hover:text-anime-pink transition-all rounded-xl bg-foreground/5 border border-foreground/10 hover:border-anime-pink/30 hover:bg-anime-pink/5"
     >
-      {theme === "dark" ? (
-        <Sun className="h-5 w-5" />
-      ) : (
-        <Moon className="h-5 w-5" />
-      )}
+      {getIcon()}
+      <span className="absolute -bottom-10 left-1/2 -translate-x-1/2 bg-anime-dark border border-white/10 px-2 py-1 rounded text-[8px] font-mono uppercase tracking-widest text-white opacity-0 group-hover:opacity-100 transition-all pointer-events-none whitespace-nowrap z-50">
+        Theme: {theme}
+      </span>
     </button>
   );
 }

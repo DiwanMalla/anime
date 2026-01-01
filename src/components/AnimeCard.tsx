@@ -68,7 +68,7 @@ export default function AnimeCard({ anime }: AnimeCardProps) {
         />
 
         {/* Main Card */}
-        <div className="relative bg-anime-dark/80 backdrop-blur-md rounded-2xl overflow-hidden border border-foreground/10 hover:border-foreground/20 transition-all duration-500 shadow-2xl">
+        <div className="relative bg-background/80 backdrop-blur-md rounded-2xl overflow-hidden border border-foreground/10 hover:border-foreground/20 transition-all duration-500 shadow-2xl">
           {/* Image Section */}
           <div className="relative aspect-[2/3] w-full overflow-hidden">
             <img
@@ -78,7 +78,7 @@ export default function AnimeCard({ anime }: AnimeCardProps) {
             />
 
             {/* Dynamic Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0a0014] via-[#0a0014]/20 to-transparent opacity-80 hover:opacity-60 transition-opacity duration-500" />
+            <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent opacity-80 hover:opacity-60 transition-opacity duration-500" />
 
             {/* Floating Badges */}
             <div className="absolute top-3 left-3 flex flex-col gap-2 z-30">
@@ -155,7 +155,9 @@ export default function AnimeCard({ anime }: AnimeCardProps) {
               <div className="flex items-center gap-1.5 text-foreground/50">
                 <Layers className="h-3 w-3" />
                 <span className="text-[10px] font-medium">
-                  {anime.episodes || "?"} EP
+                  {anime.episodes ||
+                    (anime.status === "RELEASING" ? "Live" : "?")}{" "}
+                  EP
                 </span>
               </div>
               <div

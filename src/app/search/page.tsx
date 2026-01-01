@@ -107,11 +107,6 @@ function SearchResults() {
           sort: [sort],
         };
 
-        if (genre) variables.genre = genre;
-        if (status) variables.status = status;
-        if (format) variables.format = format;
-        if (year) variables.year = parseInt(year);
-
         const data = await fetchAniList(SEARCH_ANIME_QUERY, variables);
         const newMedia = data.Page.media;
 
@@ -127,7 +122,7 @@ function SearchResults() {
       }
     };
     performSearch();
-  }, [query, genre, status, format, sort, year, page]);
+  }, [query, genre, tag, status, format, sort, year, page]);
 
   useEffect(() => {
     if (inView && hasNextPage && !loading && !loadingMore) {

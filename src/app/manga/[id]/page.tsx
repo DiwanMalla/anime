@@ -15,6 +15,9 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import WatchlistButton from "@/components/WatchlistButton";
 import CommunityLayer from "@/components/CommunityLayer";
+import MangaDetailsTabs from "@/components/MangaDetailsTabs";
+import ReadButton from "@/components/ReadButton";
+import TrailerButton from "@/components/TrailerButton";
 
 interface PageProps {
   params: Promise<{ id: string }>;
@@ -97,16 +100,17 @@ export default async function MangaDetailsPage({ params }: PageProps) {
               />
             </div>
 
-            <Link
-                href={`/manga/${manga.id}/read`}
-                className="flex items-center justify-center gap-2 bg-white text-black w-full py-4 rounded-lg font-bold hover:bg-gray-200 transition text-lg mb-2"
-              >
-                <BookOpen className="h-5 w-5 fill-current" /> Read Now
-            </Link>
+            <ReadButton mangaId={manga.id} />
 
             <WatchlistButton
               anime={manga}
               className="w-full py-4 text-lg border-orange-500/30 hover:border-orange-500/50"
+            />
+
+            <TrailerButton 
+                trailerId={manga.trailer?.id} 
+                title={title} 
+                className="w-full bg-orange-500 hover:bg-orange-600 shadow-orange-500/20"
             />
 
             <div className="anime-panel p-6 rounded-xl border border-foreground/5 space-y-6">
@@ -181,142 +185,7 @@ export default async function MangaDetailsPage({ params }: PageProps) {
             )}
           </div>
 
-          <div className="flex-1 pt-4">
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-2 text-foreground leading-tight">
-              {title}
-            </h1>
-            {manga.title.native && (
-              <h2 className="text-xl text-foreground/50 font-mono mb-6 tracking-widest opacity-70">
-                {manga.title.native}
-              </h2>
-            )}
-
-            <div className="flex flex-wrap gap-6 mb-8 text-sm font-mono items-center">
-              <div className="flex items-center gap-2 text-orange-400 bg-orange-400/10 px-3 py-1 rounded border border-orange-400/20">
-                <Star className="h-4 w-4 fill-current" />
-                <span className="font-bold">{manga.averageScore}% SCORE</span>
-              </div>
-              <div className="flex items-center gap-2 text-foreground/50">
-                <Users className="h-4 w-4" />
-                <span>{manga.popularity?.toLocaleString()} POP</span>
-              </div>
-              <span className="text-foreground/50">{manga.startDate.year}</span>
-            </div>
-
-            <div className="flex flex-wrap gap-3 mb-10">
-              {manga.genres.map((genre: string) => (
-                <span
-                  key={genre}
-                  className="text-xs font-mono text-orange-400 border border-orange-400/30 bg-orange-400/5 px-3 py-1 rounded-full uppercase tracking-wider"
-                >
-                  {genre}
-                </span>
-              ))}{" "}
-              {manga.tags
-                ?.filter((t: any) => !t.isMediaSpoiler && t.rank >= 60)
-                .slice(0, 5)
-                .map((tag: any) => (
-                  <span
-                    key={tag.id}
-                    className="text-xs font-mono text-foreground/50 hover:text-foreground cursor-pointer transition uppercase tracking-wider"
-                  >
-                    #{tag.name}
-                  </span>
-                ))}{" "}
-            </div>
-
-            <div className="mb-12">
-              <h3 className="text-xl font-mono text-foreground/50 mb-4 uppercase tracking-widest">
-                Synopsis
-              </h3>
-              <div
-                className="text-foreground/80 leading-relaxed max-w-4xl text-lg font-light"
-                dangerouslySetInnerHTML={{ __html: manga.description }}
-              />
-            </div>
-
-            {manga.relations?.edges?.length > 0 && (
-              <div className="mb-12">
-                <h3 className="text-xl font-mono text-orange-400 mb-6 flex items-center gap-2 uppercase tracking-widest">
-                  <Layers className="h-5 w-5" /> Relations
-                </h3>
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-                  {manga.relations.edges.map((edge: any) => (
-                    <Link
-                      key={edge.node.id}
-                      href={`/${edge.node.type.toLowerCase()}/${edge.node.id}`}
-                      className="group relative aspect-[2/3] rounded overflow-hidden border border-foreground/10 hover:border-orange-500/50 transition-all"
-                    >
-                      <img
-                        src={edge.node.coverImage.large}
-                        alt={edge.node.title.userPreferred}
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent opacity-80" />
-                      <div className="absolute bottom-0 left-0 p-2 w-full">
-                        <div className="text-[10px] font-mono text-orange-400 uppercase tracking-tighter mb-1">
-                          {edge.relationType.replace(/_/g, " ")}
-                        </div>
-                        <div className="text-xs font-bold text-foreground truncate">
-                          {edge.node.title.userPreferred}
-                        </div>
-                      </div>
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {manga.characters?.edges?.length > 0 && (
-              <div className="mb-12">
-                <h3 className="text-xl font-mono text-orange-400 mb-6 flex items-center gap-2 uppercase tracking-widest">
-                  <Users className="h-5 w-5" /> Characters
-                </h3>
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-                  {manga.characters.edges.map((char: any) => (
-                    <Link
-                      key={char.node.id}
-                      href={`/character/${char.node.id}`}
-                      className="group"
-                    >
-                      <div className="aspect-[3/4] rounded-lg overflow-hidden border border-foreground/10 mb-2 group-hover:border-orange-500/50 transition-colors">
-                        <img
-                          src={char.node.image.large}
-                          alt={char.node.name.full}
-                          className="w-full h-full object-cover group-hover:scale-110 transition-transform"
-                        />
-                      </div>
-                      <div className="text-xs font-bold text-foreground truncate group-hover:text-orange-400 transition-colors">
-                        {char.node.name.full}
-                      </div>
-                      <div className="text-[10px] text-foreground/50 uppercase font-mono">
-                        {char.role}
-                      </div>
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Community Section */}
-            <CommunityLayer mediaId={manga.id} mediaTitle={title} />
-            
-            {manga.recommendations?.nodes?.length > 0 && (
-              <div>
-                <h3 className="text-xl font-mono text-foreground mb-6 uppercase tracking-widest">
-                  Recommendations
-                </h3>
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
-                  {manga.recommendations.nodes.map((rec: any) => (
-                    <MangaCard
-                      key={rec.mediaRecommendation.id}
-                      manga={rec.mediaRecommendation}
-                    />
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
+          <MangaDetailsTabs manga={manga} title={title} />
         </div>
       </div>
     </main>
