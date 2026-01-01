@@ -24,9 +24,42 @@ import CommunityLayer from "@/components/CommunityLayer";
 import DetailTabs from "@/components/DetailTabs";
 import TrailerButton from "@/components/TrailerButton";
 import WatchNowButton from "@/components/WatchNowButton";
+import AdBanner from "@/components/AdBanner";
+import { Metadata } from "next";
 
 interface PageProps {
   params: Promise<{ id: string }>;
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { id } = await params;
+  try {
+    const data = await fetchAniList(ANIME_DETAILS_QUERY, { id: parseInt(id) });
+    const anime = data.Media;
+    if (!anime) return { title: "Anime Not Found" };
+
+    const title = anime.title.english || anime.title.romaji;
+    const description = anime.description?.replace(/<[^>]*>?/gm, "").slice(0, 160) || `Watch ${title} on AniVerse.`;
+
+    return {
+      title: `${title} - Watch on AniVerse`,
+      description,
+      openGraph: {
+        title: `${title} - Watch on AniVerse`,
+        description,
+        images: [anime.bannerImage || anime.coverImage.extraLarge || anime.coverImage.large],
+        type: "video.tv_show",
+      },
+      twitter: {
+        card: "summary_large_image",
+        title: `${title} - Watch on AniVerse`,
+        description,
+        images: [anime.coverImage.extraLarge || anime.coverImage.large],
+      },
+    };
+  } catch (error) {
+    return { title: "AniVerse" };
+  }
 }
 
 function formatDate(date: { year: number; month: number; day: number }) {
@@ -68,8 +101,33 @@ export default async function AnimeDetailsPage({ params }: PageProps) {
   const startDate = anime.startDate ? formatDate(anime.startDate) : "TBA";
   const endDate = anime.endDate ? formatDate(anime.endDate) : "Ongoing";
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "TVSeries",
+    "name": title,
+    "description": anime.description?.replace(/<[^>]*>?/gm, ""),
+    "image": anime.coverImage.extraLarge || anime.coverImage.large,
+    "genre": anime.genres,
+    "startDate": anime.startDate ? `${anime.startDate.year}-${anime.startDate.month}-${anime.startDate.day}` : undefined,
+    "numberOfEpisodes": anime.episodes,
+    "author": {
+      "@type": "Organization",
+      "name": anime.studios?.nodes[0]?.name
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": anime.averageScore,
+      "bestRating": "100",
+      "ratingCount": anime.popularity
+    }
+  };
+
   return (
     <main className="min-h-screen bg-background text-foreground pb-20 font-sans selection:bg-[#00f3ff] selection:text-black">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {/* Banner */}
       <div className="relative h-[50vh] md:h-[60vh] w-full overflow-hidden">
         <div className="absolute top-20 md:top-24 left-4 z-20">
@@ -586,6 +644,8 @@ export default async function AnimeDetailsPage({ params }: PageProps) {
                 )
               }
             />
+
+            <AdBanner dataAdSlot="1122334455" />
 
             {/* Community Section (Discuss) - Now below the tabs */}
             <div className="mt-16 pt-16 border-t border-white/10">

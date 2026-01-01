@@ -7,13 +7,53 @@ import { Providers } from "@/components/Providers";
 import { Analytics } from "@vercel/analytics/next";
 import AniGenie from "@/components/AniGenie";
 import NotificationManager from "@/components/NotificationManager";
+import GoogleAdsense from "@/components/GoogleAdsense";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "AniVerse - Watch TV Shows Online, Watch Movies Online",
-  description: "AniVerse - Watch TV Shows Online, Watch Movies Online",
+  title: "AniVerse - Stream Anime & Manga Online | Your Ultimate Anime Hub",
+  description: "Watch your favorite anime and read manga online at AniVerse. Discover trending series, track your watchlist, and stay updated with the airing schedule. The most premium anime streaming experience.",
+  keywords: ["anime", "manga", "streaming", "watch anime", "read manga", "aniverse", "anime database", "airing schedule"],
+  authors: [{ name: "AniVerse Team" }],
+  creator: "AniVerse",
+  publisher: "AniVerse",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  metadataBase: new URL("https://aniverse-anime.vercel.app"), // Placeholder, update to actual domain
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: "AniVerse - Stream Anime & Manga Online",
+    description: "The most premium anime and manga community platform.",
+    url: "https://aniverse-anime.vercel.app",
+    siteName: "AniVerse",
+    locale: "en_US",
+    type: "website",
+    images: [
+      {
+        url: "/aninexus.png",
+        width: 1200,
+        height: 630,
+        alt: "AniVerse Banner",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "AniVerse - Stream Anime & Manga Online",
+    description: "The most premium anime and manga community platform.",
+    images: ["/aninexus.png"],
+  },
   manifest: "/manifest.json",
+  icons: {
+    icon: "/icon.png",
+    apple: "/icon.png",
+  },
 };
 
 export const viewport: Viewport = {
@@ -34,6 +74,7 @@ export default function RootLayout({
       <body
         className={`${inter.className} antialiased transition-colors duration-300`}
       >
+        <GoogleAdsense pId="ca-pub-4639608980089431" />
         <Providers>
           <Navbar />
           <NotificationManager />

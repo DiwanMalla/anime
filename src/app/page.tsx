@@ -13,6 +13,7 @@ import TopAnimeList from "@/components/TopAnimeList";
 import TopMangaList from "@/components/TopMangaList";
 import Link from "next/link";
 import { Play, Info, ChevronRight, BookOpen } from "lucide-react";
+import AdBanner from "@/components/AdBanner";
 
 export default async function Home() {
   const [
@@ -83,9 +84,11 @@ export default async function Home() {
       <div className="relative z-20 -mt-32 space-y-12 px-4 md:px-12">
         <AnimeRow title="Trending Now" items={trending} />
         <AnimeRow title="Popular on AniVerse" items={popular} />
+        <AdBanner dataAdSlot="1234567890" />
         <AnimeRow title="Upcoming Releases" items={upcoming} />
 
         <MangaRow title="Trending Manga" items={trendingManga} />
+        <AdBanner dataAdSlot="0987654321" />
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           <TopAnimeList animeList={topRated} />
